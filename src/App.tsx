@@ -22,7 +22,7 @@ const App: React.FC = () => {
     return( 
     <BrowserRouter>
     <Routes>
-    <Route path="/" element={<PitchDesk />} />
+    <Route path="/pitch/" element={<PitchDesk />} />
     <Route path="*" element={<NotFound />} />
     <Route path="/slides/intro" element={<IntroSlide />} />
     <Route path="/slides/problem" element={<ProblemSlide />} />
