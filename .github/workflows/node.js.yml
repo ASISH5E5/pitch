@@ -8,13 +8,11 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
         node-version: [20.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
     - uses: actions/checkout@v4
@@ -33,13 +31,18 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-node-
 
-    - run: npm ci  # Use `npm ci` to install dependencies cleanly
-    - run: npm run build  # Run the build script, no need for --if-present unless optional
-    - run: npm test  # Make sure test script is defined in package.json
+    - run: npm ci
+    - run: npm run build
+    - run: npm test
+
+    - name: Set Git user identity
+      run: |
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git config --global user.name "github-actions[bot]"
 
     - name: Deploy with gh-pages
       run: |
         git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-        npm run deploy  # Deploy using the defined `gh-pages` script
+        npm run deploy
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
