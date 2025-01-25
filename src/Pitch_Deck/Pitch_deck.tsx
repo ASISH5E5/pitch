@@ -5,29 +5,29 @@ import { Button } from '@/components/ui/button';
 
 
 const mainNavigationItems = [
-  { title: "Problem", showInCompact: true, url: "/pitch/slides/problem" },
+  { title: "Problem", showInCompact: true, url: "/slides/problem" },
   { title: "Solution", showInCompact: true, url: "/pitch/slides/solution" },
-  { title: "Team", showInCompact: false, url: "/slides/team" },
-  { title: "Market Size", showInCompact: true, url: "/slides/market-size" },
-  { title: "Competition", showInCompact: false, url: "/slides/competetion" },
-  { title: "GTM", showInCompact: false, url: "/slides/gtm" },
-  { title: "Traction", showInCompact: true, url: "/slides/traction" },
-  { title: "Our Ask", showInCompact: true, url: "/slides/our-ask" },
-  { title: "Where This Can Go", showInCompact: false, url: "/slides/future" },
-  { title: "Vision", showInCompact: false, url: "/slides/vision" },
-  { title: "Next Steps", showInCompact: true, url: "/slides/next-step" },
+  { title: "Team", showInCompact: false, url: "/pitch/slides/team" },
+  { title: "Market Size", showInCompact: true, url: "/pitch/slides/market-size" },
+  { title: "Competition", showInCompact: false, url: "/pitch/slides/competetion" },
+  { title: "GTM", showInCompact: false, url: "/pitch/slides/gtm" },
+  { title: "Traction", showInCompact: true, url: "/pitch/slides/traction" },
+  { title: "Our Ask", showInCompact: true, url: "/pitch/slides/our-ask" },
+  { title: "Where This Can Go", showInCompact: false, url: "/pitch/slides/future" },
+  { title: "Vision", showInCompact: false, url: "/pitch/slides/vision" },
+  { title: "Next Steps", showInCompact: true, url: "/pitch/slides/next-step" },
 ];
 
 const appendixItems = [
-  { title: "Why This Why Now", showInCompact: false, url: "/slides/whynow" },
-  { title: "Business Model", showInCompact: false, url: "/slides/business" }
+  { title: "Why This Why Now", showInCompact: false, url: "/pitch/slides/whynow" },
+  { title: "Business Model", showInCompact: false, url: "/pitch/slides/business" }
 ];
 
 export const PitchDesk = () => {
   const [isCompact, setIsCompact] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
   const [modalDisplayCount, setModalDisplayCount] = useState(0);
-  const [selectedSlide, setSelectedSlide] = useState("/slides/intro");
+  const [selectedSlide, setSelectedSlide] = useState("/pitch/slides/intro");
   const sidebarRef = useRef(null);
 
 
@@ -42,7 +42,7 @@ export const PitchDesk = () => {
 
   const allNavigationItems = useMemo(() => {
     return [
-      { title: "Intro Slide", url: "/slides/intro", showInCompact: false },
+      { title: "Intro Slide", url: "/pitch/slides/intro", showInCompact: false },
       ...mainNavigationItems,
       ...appendixItems
     ];
@@ -139,7 +139,7 @@ export const PitchDesk = () => {
           <div className="flex-1 overflow-y-auto mx-2">
             {/* Intro Slide - Always visible */}
             <div
-              onClick={() => handleSlideClick("/slides/intro")}
+              onClick={() => handleSlideClick("/pitch/slides/intro")}
               className={`
                 w-full p-3 text-gray-600 flex items-center justify-between text-base cursor-pointer
                 transition-colors 

@@ -20,12 +20,12 @@ import LMSDashboard from "./Pitch_Deck/Elements/Competetion";
 
 const App: React.FC = () => {
     return( 
-    <BrowserRouter>
+    <BrowserRouter basename="/pitch">
     <Routes>
-    <Route path="/pitch/" element={<PitchDesk />} />
-    <Route path="/pitch/*" element={<NotFound />} />
-    <Route path="/pitch/slides/intro" element={<IntroSlide />} />
-    <Route path="/pitch/slides/problem" element={<ProblemSlide />} />
+    <Route path="/" element={<PitchDesk />} />
+    <Route path="*" element={<NotFound />} />
+    <Route path="/slides/intro" element={<IntroSlide />} />
+    <Route path="/slides/problem" element={<ProblemSlide />} />
     <Route path="/slides/solution" element={<SolutionSlide />} />
     <Route path="/slides/team" element={<TeamSlide />} />
     <Route path="/slides/market-size" element={<MarketSlide />} />
