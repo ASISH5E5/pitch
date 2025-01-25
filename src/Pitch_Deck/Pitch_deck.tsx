@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 const mainNavigationItems = [
   { title: "Problem", showInCompact: true, url: "/slides/problem" },
   { title: "Solution", showInCompact: true, url: "/pitch/slides/solution" },
-  { title: "Team", showInCompact: false, url: "/pitch/slides/team" },
+  { title: "Team", showInCompact: false, url: "/slides/team" },
   { title: "Market Size", showInCompact: true, url: "/pitch/slides/market-size" },
   { title: "Competition", showInCompact: false, url: "/pitch/slides/competetion" },
   { title: "GTM", showInCompact: false, url: "/pitch/slides/gtm" },
