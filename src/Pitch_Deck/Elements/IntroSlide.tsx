@@ -30,7 +30,7 @@ const IntroSlide = () => {
         </div>
         {/* CTAs */}
         <div className="flex flex-col items-center gap-4">
-          <Button className="bg-blue-600 text-white hover:bg-blue-700 px-8 py-6 text-lg" onClick={() => navigate("/slides/problem") }>
+          <Button className="bg-blue-600 text-white hover:bg-blue-700 px-8 py-6 text-lg" onClick={() => navigate("/pitch/slides/problem") }>
             Explore The Problem
           </Button>
           <Button
