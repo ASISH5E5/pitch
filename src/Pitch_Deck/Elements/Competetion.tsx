@@ -20,8 +20,8 @@ interface FeatureComparisonProps {
 
 const CompetitorList: React.FC<CompetitorListProps> = ({ selectedCompanies, onCompanySelect }) => (
   <Card className="w-full h-full">
-    <CardHeader className="p-4 flex flex-row justify-between items-center">
-      <CardTitle className="text-lg">LMS Competitors</CardTitle>
+    <CardHeader className="p-4 flex flex-row-2  justify-left items-left">
+      <CardTitle className="text-lg mb-2">LMS Competitors</CardTitle>
       <div className="flex gap-2">
         <button
           onClick={() => onCompanySelect('selectAll')}

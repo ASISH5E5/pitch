@@ -1,21 +1,29 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { useState } from 'react';
 import { ArrowRight, Brain, CheckCircle, Shield, Target, TrendingUp, Users } from 'lucide-react';
 import data from '../ElementsData/data.json';
+import GPSAnalogy from './GPSAnalogy'; // Import GPSAnalogy component
 import { SolutionSlideData } from '../Interfaces/Interfaces';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 // Define the icon mapping
 const iconMapping: { [key: string]: JSX.Element } = {
-  Users:<Users className="w-6 h-6"/>,
-  Brain:<Brain className="w-6 h-6"/>,
+  Users: <Users className="w-6 h-6" />,
+  Brain: <Brain className="w-6 h-6" />,
   Shield: <Shield className="w-6 h-6" />,
   TrendingUp: <TrendingUp className="w-6 h-6" />,
   CheckCircle: <CheckCircle className="w-6 h-6" />,
   ArrowRight: <ArrowRight className="w-4 h-4 text-gray-400 flex-shrink-0" />,
-  Target: <Target className="w-5 h-5" />
+  Target: <Target className="w-5 h-5" />,
 };
 
 const SolutionSlide = () => {
   const { features, impactAreas }: SolutionSlideData = data.SolutionSlide;
+  const [showAnalogy, setShowAnalogy] = useState(false); // State for GPSAnalogy visibility
+
+  // When showAnalogy is true, show GPSAnalogy component
+  if (showAnalogy) {
+    return <GPSAnalogy onBack={() => setShowAnalogy(false)} />;
+  }
 
   return (
     <div className="w-full mx-auto p-4">
@@ -51,9 +59,7 @@ const SolutionSlide = () => {
                         </div>
                         <div>
                           <h3 className="font-bold mb-1">{feature.title}</h3>
-                          <div className="text-sm text-gray-600">
-                            {feature.solution}
-                          </div>
+                          <div className="text-sm text-gray-600">{feature.solution}</div>
                         </div>
                       </div>
                     </div>
@@ -79,9 +85,7 @@ const SolutionSlide = () => {
                         </div>
                         <div className="flex-grow">
                           <div className="flex items-center justify-between mb-1">
-                            <h4 className="font-semibold text-base">
-                              {impact.metric}
-                            </h4>
+                            <h4 className="font-semibold text-base">{impact.metric}</h4>
                             <span className={`text-${impact.color}-700 font-bold text-sm bg-${impact.color}-50 px-2 py-0.5 rounded-full`}>
                               {impact.improvement}
                             </span>
@@ -103,7 +107,7 @@ const SolutionSlide = () => {
           <div className="mt-12 text-center">
             <button
               className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 flex items-center gap-2 mx-auto"
-              onClick={() => {}}
+              onClick={() => setShowAnalogy(true)} // Show the GPS Analogy on click
             >
               {iconMapping.Target} {/* Use icon mapping */}
               Explore the GPS Analogy

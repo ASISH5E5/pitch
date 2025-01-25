@@ -17,6 +17,7 @@ import BusinessModel from "./Pitch_Deck/Elements/BusinessModel";
 import GPSAnalogy from "./Pitch_Deck/Elements/GPSAnalogy";
 import GTMStrategy from "./Pitch_Deck/Elements/GTM";
 import LMSDashboard from "./Pitch_Deck/Elements/Competetion";
+import Founders from "./Pitch_Deck/Elements/Founders";
 
 const App: React.FC = () => {
     return( 
@@ -24,7 +25,9 @@ const App: React.FC = () => {
     <Routes>
     <Route path="/" element={<PitchDesk />} />
     <Route path="*" element={<NotFound />} />
-    <Route path="/slides/intro" element={<IntroSlide />} />
+    <Route path="/slides/intro" element={<IntroSlide setSelectedSlide={function (): void {
+            throw new Error("Function not implemented.");
+          } }  />} />
     <Route path="/slides/problem" element={<ProblemSlide />} />
     <Route path="/slides/solution" element={<SolutionSlide />} />
     <Route path="/slides/team" element={<TeamSlide />} />
@@ -38,6 +41,9 @@ const App: React.FC = () => {
     <Route path="/slides/whynow" element={<WhyNowAnalysis />} />
     <Route path="/slides/business" element={<BusinessModel/>} />
     <Route path="/slides/competetion" element={<LMSDashboard/>} />
+    <Route path="/slides/founders" element={<Founders onBack={function (): void {
+            throw new Error("Function not implemented.");
+          } }/>} />
     <Route path="/slides/gps" element={<GPSAnalogy onBack={function (): void {
             throw new Error("Function not implemented.");
           } }/>} />

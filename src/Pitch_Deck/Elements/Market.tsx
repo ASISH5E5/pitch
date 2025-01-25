@@ -20,7 +20,7 @@ const {marketData,assumptions,icpPoints,ldPoints} :MarketSlideData=data.MarketSl
   const funnelData: FunnelDataItem[] = [
     { name: 'TAM', value: marketData.tam.total, fill: '#0088FE'},
     { name: 'SAM', value: marketData.sam.total, fill: '#00C49F'},
-       { name: 'SOM', value: marketData.som.total * 5, fill: '#FFBB28', width: '150%' } // Increased value and width
+       { name: 'SOM', value: marketData.som.total, fill: '#FFBB28' } // Increased value and width
 
   ];
 

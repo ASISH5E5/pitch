@@ -1,36 +1,40 @@
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
+import { ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import GPSAnalogy from "./GPSAnalogy";
+import data from "../ElementsData/data.json";
 
-import { ChevronRight } from 'lucide-react';
-import GPSAnalogy from './GPSAnalogy';
-import data from '../ElementsData/data.json'
 const VisionSlide = () => {
-  const [show, setShow] = useState(false);
-const {mainStatement}=data.VisionSlide;
-  if (show) {
-    return <GPSAnalogy onBack={() => setShow(false)} />;
-  }
-  const [animate, setAnimate] = useState(false);
+  const [showGPSAnalogy, setShowGPSAnalogy] = useState(false); 
+  const [animate, setAnimate] = useState(false); // Animation state
+  const { mainStatement } = data.VisionSlide;
+
   useEffect(() => {
-    setAnimate(true);
+    setAnimate(true); 
   }, []);
-  
-  return (
-    <div className="w-full h-screen  mx-auto p-8 flex items-center justify-center bg-gradient-to-b from-white to-blue-50">
-      <div className="space-y-16">
+
+  // Render GPSAnalogy when `showGPSAnalogy` is true
+  const renderContent = () => {
+    if (showGPSAnalogy) {
+      return <GPSAnalogy onBack={() => setShowGPSAnalogy(false)} />;
+    }
+
+    return (
+      <div className="space-y-16 mt-12 h-screen my-auto">
         {/* Vision Statement */}
         <div className="relative">
-          <div className="max-w-4xl mx-auto text-center space-y-3">
+          <div className="w-full mx-auto text-center space-y-3">
             {mainStatement.map((line, lineIndex) => (
               <div
                 key={lineIndex}
-                className="flex justify-center items-center text-4xl md:text-5xl font-light w-full"
+                className="flex justify-center  items-center text-4xl md:text-5xl font-light "
               >
                 {line.words.map((word, wordIndex) => (
                   <span
                     key={`${lineIndex}-${wordIndex}`}
                     className={`transition-all w-full duration-1000 transform whitespace-pre
-                      ${word.highlight ? 'text-blue-600 font-medium' : 'text-gray-700'}
-                      ${animate ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}
+                      ${word.highlight ? "text-blue-600 font-medium" : "text-gray-700"}
+                      ${animate ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}
                     `}
                     style={{ transitionDelay: `${(lineIndex * 3 + wordIndex) * 100}ms` }}
                   >
@@ -48,18 +52,28 @@ const {mainStatement}=data.VisionSlide;
         </div>
         {/* Call to Action */}
         <div
-          className={`text-center transition-all duration-700 transform
-            ${animate ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}
-          `}
-          style={{ transitionDelay: '1200ms' }}
+          className={`text-center transition-all duration-700 transform ${
+            animate ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+          }`}
+          style={{ transitionDelay: "1200ms" }}
         >
-          <button onClick={() => setShow(true)} className="bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-medium inline-flex items-center gap-2 hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl">
+          <Button
+            onClick={() => setShowGPSAnalogy(true)}
+            className="bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-medium inline-flex items-center gap-2 hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl"
+          >
             Explore the GPS Analogy
             <ChevronRight className="w-5 h-5" />
-          </button>
+          </Button>
         </div>
       </div>
+    );
+  };
+
+  return (
+    <div className="w-full mx-auto p-8 flex items-center justify-center bg-gradient-to-b from-white to-blue-50">
+      {renderContent()}
     </div>
   );
 };
+
 export default VisionSlide;

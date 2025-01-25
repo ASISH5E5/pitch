@@ -1,13 +1,14 @@
-import { useState, useRef, useMemo, useEffect } from 'react';  
+import React, { useState, useRef, useMemo, useEffect } from 'react';  
 import { Switch } from '@/components/ui/switch';
 import { X, Menu, ChevronLeft, ChevronRight } from "lucide-react"; 
 import { Button } from '@/components/ui/button';
-
+import { UserModal } from './UserForm';
+import IntroSlide from './Elements/IntroSlide';
 
 const mainNavigationItems = [
-  { title: "Problem", showInCompact: true, url: "/slides/problem" },
+  { title: "Problem", showInCompact: true, url: "/pitch/slides/problem" },
   { title: "Solution", showInCompact: true, url: "/pitch/slides/solution" },
-  { title: "Team", showInCompact: false, url: "/slides/team" },
+  { title: "Team", showInCompact: false, url: "/pitch/slides/team" },
   { title: "Market Size", showInCompact: true, url: "/pitch/slides/market-size" },
   { title: "Competition", showInCompact: false, url: "/pitch/slides/competetion" },
   { title: "GTM", showInCompact: false, url: "/pitch/slides/gtm" },
@@ -23,20 +24,29 @@ const appendixItems = [
   { title: "Business Model", showInCompact: false, url: "/pitch/slides/business" }
 ];
 
-export const PitchDesk = () => {
+export const PitchDesk: React.FC = () => {
   const [isCompact, setIsCompact] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
-  const [modalDisplayCount, setModalDisplayCount] = useState(0);
+  const [isFirstVisit, setIsFirstVisit] = useState(true);
   const [selectedSlide, setSelectedSlide] = useState("/pitch/slides/intro");
   const sidebarRef = useRef(null);
 
-
   // Check for first visit using localStorage
   useEffect(() => {
-    if (modalDisplayCount === 0) {
-      setModalDisplayCount(prevCount => prevCount + 1);
+    const hasVisitedBefore = localStorage.getItem('pitchDeckFirstVisit');
+    if (hasVisitedBefore) {
+      setIsFirstVisit(false);
     }
   }, []);
+
+  const userFormSubmitHandle = (userData: { name: string, username: string }) => {
+    // Handle user form submission
+    console.log('User data submitted:', userData);
+    
+    // Mark that the user has visited
+    localStorage.setItem('pitchDeckFirstVisit', 'true');
+    setIsFirstVisit(false);
+  };
 
   const toggleSidebar = () => setIsOpen(!isOpen);
 
@@ -51,8 +61,6 @@ export const PitchDesk = () => {
   const handleSlideClick = (url: string) => {
     setSelectedSlide(url);
   };
-
-
 
   const handleNavigation = (direction: string) => {
     const currentIndex = allNavigationItems.findIndex(item => item.url === selectedSlide);
@@ -76,6 +84,13 @@ export const PitchDesk = () => {
 
   return (
     <div className="flex h-screen overflow-hidden w-full">
+      <UserModal 
+        isOpen={isFirstVisit}
+        onSubmit={userFormSubmitHandle}
+        onClose={() => setIsFirstVisit(false)}
+        
+      />
+
       <div className="relative w-full" style={{ width: sidebarWidth, flexShrink: 0 }}>
         {!isOpen && (
           <Button
@@ -143,7 +158,7 @@ export const PitchDesk = () => {
               className={`
                 w-full p-3 text-gray-600 flex items-center justify-between text-base cursor-pointer
                 transition-colors 
-                ${selectedSlide === "/slides/intro" ? 'pl-4 bg-blue-200 rounded-sm text-blue-600 border border-blue-100' : ''}
+                ${selectedSlide === "/pitch/slides/intro" ? 'pl-4 bg-blue-200 rounded-sm text-blue-600 border border-blue-100' : ''}
               `}
             >
               <span className="truncate">Intro Slide</span>
@@ -194,15 +209,13 @@ export const PitchDesk = () => {
           marginLeft: isOpen ? '0' : `-${sidebarWidth}`,
           transition: 'margin-left 300ms ease-in-out'
         }}
-      >
-       {/* <UserModal /> */}
-        
+      >        
         <div className="relative w-full h-screen w-auto mx-auto">
           <Button
             variant="ghost"
             className="absolute left-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-white/80 hover:bg-white shadow-md rounded-full p-2"
             onClick={() => handleNavigation('prev')}
-            disabled={selectedSlide === "/slides/intro"}
+            disabled={selectedSlide === "/pitch/slides/intro"}
           >
             <ChevronLeft className="h-6 w-6" />
           </Button>
@@ -215,12 +228,15 @@ export const PitchDesk = () => {
           >
             <ChevronRight className="h-6 w-6" />
           </Button>
-
-          <iframe
-            src={selectedSlide}
-            className="mx-auto h-auto w-[90%] min-h-[90%] min-w-[80%]  flex-1 mt-8 border-none"
-            title="Slide Content"
-          />
+          {selectedSlide === "/pitch/slides/intro" ? (
+  <IntroSlide setSelectedSlide={setSelectedSlide} />
+) : (
+  <iframe
+    src={selectedSlide}
+    className="mx-auto w-full h-full border-none"
+    title="Slide Content"
+  />
+)}
         </div>
       </div>
     </div>

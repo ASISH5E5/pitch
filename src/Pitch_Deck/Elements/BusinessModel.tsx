@@ -45,8 +45,8 @@ const {pricingTiers,metrics}=data.BusinessSlide;
           <div className="flex items-center gap-3 mb-6">
             {iconMapping[pricingTiers.corporate.icon as IconKey]}
             <div className='flex-1 justify-end'>
-              <h2 className="text-2xl font-bold text-gray-900">Individual</h2>
-              <div className="text-3xl font-bold text-blue-600 mt-1">{pricingTiers.corporate.price}</div>
+              <h2 className="text-2xl font-bold text-gray-900">{pricingTiers.Individual.title}</h2>
+              <div className="text-3xl font-bold text-blue-600 mt-1">{pricingTiers.Individual.price}</div>
             </div>
           </div>
           <div className="space-y-4 ml-12">

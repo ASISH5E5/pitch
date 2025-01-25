@@ -5,12 +5,7 @@ import data from '../ElementsData/data.json';
 
 const WhyNowAnalysis = () => {
   const [activeTab, setActiveTab] = useState('demand');
-  const [activeMainInfo, setActiveMainInfo] = useState<number | null>(null); // Correct type
-  const [activeCagrInfo, setActiveCagrInfo] = useState<number | null>(null); // Correct type
-  const { marketIndicators, criticalFactors } = data.WhyThisSlide;
-
- 
-
+  
   const iconMapping : { [key: string]: JSX.Element }  = {
     TrendingUp: <TrendingUp className="w-6 h-6" />,
     AlertTriangle: <AlertTriangle className="w-6 h-6" />,
@@ -21,8 +16,72 @@ const WhyNowAnalysis = () => {
     ArrowUpRight: <ArrowUpRight className="w-4 h-4 text-green-600" />
   };
 
+  const StatWithTooltip = ({ 
+    icon, 
+    title, 
+    details, 
+    dataPoint, 
+    source, 
+    cagrValue, 
+    cagrPeriod, 
+    cagrMarket,
+    cagrSource 
+  } : any) => {
+    const [showMainTooltip, setShowMainTooltip] = useState(false);
+    const [showCagrTooltip, setShowCagrTooltip] = useState(false);
+
+    return (
+      <div className="p-4 bg-white rounded-lg shadow-sm relative">
+        <div className="flex items-center gap-2 text-blue-600 mb-2">
+          {iconMapping[icon]} 
+          <h3 className="font-bold">{title}</h3>
+          <div 
+            className="ml-auto relative"
+            onMouseEnter={() => setShowMainTooltip(true)}
+            onMouseLeave={() => setShowMainTooltip(false)}
+          >
+            {showMainTooltip && (
+              <div className="absolute bg-white text-black rounded-lg bottom-full transform -translate-x-1/2 mb-2 z-10 left-1/2">
+                <div className="bg-white text-black rounded-lg text-sm rounded-lg p-1 whitespace-nowrap shadow-lg ">
+                  <p className="text-4 bg-white text-black rounded-lg">{source}</p>
+                </div>
+              </div>
+            )}
+            {iconMapping.Info}
+          </div>
+        </div>
+        <p className="text-gray-600">{details}</p>
+        <p className="text-blue-600 font-medium mt-2">{dataPoint}</p>
+        <div className="mt-3 p-2 bg-blue-50 rounded-lg">
+          <div className="flex items-center">
+            <div className="flex items-center gap-1">
+              {iconMapping.ArrowUpRight}
+              <span className="text-green-600 font-bold">{cagrValue} CAGR</span>
+              <span className="text-sm text-gray-600 ml-1">({cagrPeriod})</span>
+            </div>
+            <div 
+              className="ml-auto relative"
+              onMouseEnter={() => setShowCagrTooltip(true)}
+              onMouseLeave={() => setShowCagrTooltip(false)}
+            >
+              {showCagrTooltip && (
+                <div className="absolute bottom-full transform -translate-x-1/2 mb-2 z-10 left-1/2">
+                  <div className=" text-sm rounded-lg p-2 whitespace-nowrap shadow-lg ">
+                    <p className="text-sm bg-white text-black rounded-lg">{cagrSource}</p>
+                  </div>
+                </div>
+              )}
+              {iconMapping.Info}
+            </div>
+          </div>
+          <p className="text-sm text-gray-600 mt-1">{cagrMarket}</p>
+        </div>
+      </div>
+    );
+  };
+
   return (
-    <div className="w-full  mx-auto p-4">
+    <div className="w-full mx-auto p-4">
       <Card className="bg-gradient-to-br from-blue-50 to-white">
         <CardHeader>
           <CardTitle className="text-2xl font-bold">Why This, Why Now?</CardTitle>
@@ -33,11 +92,7 @@ const WhyNowAnalysis = () => {
               {['demand', 'critical'].map((tab) => (
                 <button
                   key={tab}
-                  onClick={() => {
-                    setActiveTab(tab);
-                    setActiveMainInfo(null); // Reset active info
-                    setActiveCagrInfo(null); // Reset active CAGR info
-                  }}
+                  onClick={() => setActiveTab(tab)}
                   className={`px-4 py-2 rounded-lg font-medium ${
                     activeTab === tab
                       ? 'bg-blue-600 text-white'
@@ -50,62 +105,28 @@ const WhyNowAnalysis = () => {
             </div>
             {activeTab === 'demand' && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {marketIndicators.map((indicator, index) => (
-                  <div key={index} className="p-4 bg-white rounded-lg shadow-sm relative">
-                    <div className="flex items-center gap-2 text-blue-600 mb-2">
-                      {iconMapping[indicator.icon ]} {/* Dynamically render icon */}
-                      <h3 className="font-bold">{indicator.title}</h3>
-                      <button
-                        className="ml-auto"
-                        onClick={() => {
-                          setActiveMainInfo(activeMainInfo === index ? null : index);
-                          setActiveCagrInfo(null); // Reset CAGR info when main info is toggled
-                        }}
-                      >
-                        {iconMapping.Info} {/* Dynamically render info icon */}
-                      </button>
-                    </div>
-                    <p className="text-gray-600">{indicator.details}</p>
-                    <p className="text-blue-600 font-medium mt-2">{indicator.dataPoint}</p>
-                    <div className="mt-3 p-2 bg-blue-50 rounded-lg">
-                      <div className="flex items-center">
-                        <div className="flex items-center gap-1">
-                          {iconMapping.ArrowUpRight} {/* Dynamically render CAGR icon */}
-                          <span className="text-green-600 font-bold">{indicator.cagr.value} CAGR</span>
-                          <span className="text-sm text-gray-600 ml-1">({indicator.cagr.period})</span>
-                        </div>
-                        <button
-                          className="ml-auto"
-                          onClick={() => {
-                            setActiveCagrInfo(activeCagrInfo === index ? null : index);
-                            setActiveMainInfo(null); // Reset main info when CAGR info is toggled
-                          }}
-                        >
-                          {iconMapping.Info} {/* Dynamically render info icon */}
-                        </button>
-                      </div>
-                      <p className="text-sm text-gray-600 mt-1">{indicator.cagr.market}</p>
-                    </div>
-                    {activeMainInfo === index && (
-                      <div className="absolute top-full left-0 mt-2 p-3 bg-white shadow-lg rounded-lg z-10 w-full">
-                        <p className="text-sm text-gray-600">Source: {indicator.source}</p>
-                      </div>
-                    )}
-                    {activeCagrInfo === index && (
-                      <div className="absolute top-full left-0 mt-2 p-3 bg-white shadow-lg rounded-lg z-10 w-full">
-                        <p className="text-sm text-gray-600">Source: {indicator.cagr.source}</p>
-                      </div>
-                    )}
-                  </div>
+                {data.WhyThisSlide.marketIndicators.map((indicator, index) => (
+                  <StatWithTooltip
+                    key={index}
+                    icon={indicator.icon}
+                    title={indicator.title}
+                    details={indicator.details}
+                    dataPoint={indicator.dataPoint}
+                    source={indicator.source}
+                    cagrValue={indicator.cagr.value}
+                    cagrPeriod={indicator.cagr.period}
+                    cagrMarket={indicator.cagr.market}
+                    cagrSource={indicator.cagr.source}
+                  />
                 ))}
               </div>
             )}
             {activeTab === 'critical' && (
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {criticalFactors.map((factor, index) => (
+                {data.WhyThisSlide.criticalFactors.map((factor, index) => (
                   <div key={index} className="p-4 bg-white rounded-lg shadow-sm">
-                    <div className="flex items-center gap-2 text-blue-600">
-                      {iconMapping[factor.icon ]} {/* Dynamically render icon */}
+                    <div className="flex items-center gap-2 text-blue-600 bg-white text-black rounded-lg">
+                      {iconMapping[factor.icon]} 
                       <span className="font-bold">{factor.factor}</span>
                     </div>
                   </div>

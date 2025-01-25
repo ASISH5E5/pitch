@@ -673,6 +673,20 @@
         "Personalized learning path",
         "Progress tracking"
       ]
+    },
+    "Individual": {
+      "icon": "Building2",
+      "title": "Individual",
+      "price": "$10/month",
+      "features": [
+        "Custom skill assessments",
+        "AI-generated personalized courses",
+        "Integration with existing LMS",
+        "Advanced analytics dashboard",
+        "Dedicated customer success",
+        "Personalized learning path",
+        "Progress tracking"
+      ]
     }
   },
   "metrics": {
