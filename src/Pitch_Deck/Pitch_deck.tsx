@@ -5,8 +5,8 @@ import { Button } from '@/components/ui/button';
 
 
 const mainNavigationItems = [
-  { title: "Problem", showInCompact: true, url: "/slides/problem" },
-  { title: "Solution", showInCompact: true, url: "/slides/solution" },
+  { title: "Problem", showInCompact: true, url: "/pitch/slides/problem" },
+  { title: "Solution", showInCompact: true, url: "/pitch/slides/solution" },
   { title: "Team", showInCompact: false, url: "/slides/team" },
   { title: "Market Size", showInCompact: true, url: "/slides/market-size" },
   { title: "Competition", showInCompact: false, url: "/slides/competetion" },

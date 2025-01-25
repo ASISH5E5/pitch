@@ -24,8 +24,8 @@ const App: React.FC = () => {
     <Routes>
     <Route path="/pitch/" element={<PitchDesk />} />
     <Route path="*" element={<NotFound />} />
-    <Route path="/slides/intro" element={<IntroSlide />} />
-    <Route path="/slides/problem" element={<ProblemSlide />} />
+    <Route path="/pitch/slides/intro" element={<IntroSlide />} />
+    <Route path="/pitch/slides/problem" element={<ProblemSlide />} />
     <Route path="/slides/solution" element={<SolutionSlide />} />
     <Route path="/slides/team" element={<TeamSlide />} />
     <Route path="/slides/market-size" element={<MarketSlide />} />
