@@ -83,7 +83,7 @@ export const PitchDesk: React.FC = () => {
   const showAppendixSection = visibleAppendixItems.length > 0;
 
   return (
-    <div className="flex h-screen overflow-hidden w-full">
+    <div className="flex h-screen  w-full">
       <UserModal 
         isOpen={isFirstVisit}
         onSubmit={userFormSubmitHandle}
