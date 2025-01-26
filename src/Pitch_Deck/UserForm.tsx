@@ -13,7 +13,7 @@ import { Label } from "@/components/ui/label";
 
 interface UserModalProps {
   isOpen: boolean;
-  onSubmit: (userData: { name: string; username: string }) => void;
+  onSubmit: (userData: { name: string; email: string }) => void;
   onClose: () => void;
 }
 
@@ -23,11 +23,13 @@ export const UserModal: React.FC<UserModalProps> = ({
   onClose 
 }) => {
   const [name, setName] = useState('');
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState<string>('');
 
   const handleSubmit = () => {
-    if (name.trim() && username.trim()) {
-      onSubmit({ name, username });
+    if (name.trim() && email.trim()) {
+      onSubmit({ name,email });
+      console.log(name)
+      console.log(email)
       onClose();
     }
   };
@@ -50,22 +52,24 @@ export const UserModal: React.FC<UserModalProps> = ({
               id="name" 
               value={name} 
               onChange={(e) => setName(e.target.value)}
-              className="col-span-3 rounded-xl" 
+              className="col-span-3 rounded-lg" 
               placeholder="Enter your full name"
             />
           </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="username" className="text-right">
-              Username
-            </Label>
-            <Input 
-              id="username" 
-              value={username} 
-              onChange={(e) => setUsername(e.target.value)}
-              className="col-span-3" 
-              placeholder="Choose a username"
-            />
-          </div>
+
+<div className="grid grid-cols-4 items-center gap-4">
+  <Label htmlFor="email" className="text-right">
+    Email
+  </Label>
+  <Input 
+    id="email" 
+    type="email"  // Add the email type for validation
+    value={email}  // Bind to the 'email' state variable
+    onChange={(e) => setEmail(e.target.value)}  // Update the email value
+    className="col-span-3 rounded-lg" 
+    placeholder="Enter your email"
+  />
+</div>
         </div>
         <DialogFooter>
           <Button 
