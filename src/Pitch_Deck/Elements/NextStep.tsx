@@ -3,16 +3,35 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
-import data from '../Elements'
+import data from '../ElementsData/data.json';
 
+// Interfaces for data and state management
+interface Option {
+  action: string;
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+}
 
-const VCActionSubmission = () => {
-  const [selectedAction, setSelectedAction] = useState(null);
-  const [formData, setFormData] = useState({});
-  const [submitted, setSubmitted] = useState(false);
+interface NextSlideData {
+  options: Option[];
+}
+
+interface FormData {
+  [key: string]: string;
+}
+
+type SelectedAction = 'schedule' | 'info' | 'feedback' | 'pass' | null;
+type SubmittedState = boolean;
+
+const VCActionSubmission: React.FC = () => {
+  const { options }: NextSlideData = data.NextSlide; // Assuming `data.NextSlide` follows this structure
+
+  const [selectedAction, setSelectedAction] = useState<SelectedAction>(null);
+  const [formData, setFormData] = useState<FormData>({});
+  const [submitted, setSubmitted] = useState<SubmittedState>(false);
 
   useEffect(() => {
-    // Dynamically load Calendly script
     if (selectedAction === 'schedule') {
       const script = document.createElement('script');
       script.src = 'https://assets.calendly.com/assets/external/widget.js';
@@ -25,61 +44,18 @@ const VCActionSubmission = () => {
     }
   }, [selectedAction]);
 
-  const options = [
-    {
-      title: "Schedule a Call",
-      description: "Let's discuss your vision in detail",
-      action: "schedule",
-      icon: (
-        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-        </svg>
-      )
-    },
-    {
-      title: "Request More Information",
-      description: "Get detailed financials and projections",
-      action: "info",
-      icon: (
-        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      )
-    },
-    {
-      title: "Share Feedback",
-      description: "Provide constructive feedback on the pitch",
-      action: "feedback",
-      icon: (
-        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
-        </svg>
-      )
-    },
-    {
-      title: "Pass for Now",
-      description: "Not a fit for current investment thesis",
-      action: "pass",
-      icon: (
-        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      )
-    }
-  ];
-
-  const handleAction = (action: string | React.SetStateAction<null>) => {
+  const handleAction = (action: string) => {
     setSelectedAction(action);
     setFormData({});
     setSubmitted(false);
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
     try {
@@ -229,11 +205,9 @@ const VCActionSubmission = () => {
                 <button
                   key={option.action}
                   onClick={() => handleAction(option.action)}
-                  className={`p-3 rounded-lg transition-all hover:scale-102 ${
-                    selectedAction === option.action
-                      ? 'bg-blue-100 border border-blue-500 shadow-sm'
-                      : 'bg-white hover:bg-gray-50 border border-gray-200'
-                  }`}
+                  className={`p-3 rounded-lg transition-all hover:scale-102 ${selectedAction === option.action
+                    ? 'bg-blue-100 border border-blue-500 shadow-sm'
+                    : 'bg-white hover:bg-gray-50 border border-gray-200'}`}
                 >
                   <div className="flex flex-col items-center text-center space-y-2">
                     <div className="text-blue-600">
