@@ -53,7 +53,7 @@ export const PitchDesk: React.FC = () => {
     }
   }, []);
 
-  const userFormSubmitHandle = (userData: { name: string, username: string }) => {
+  const userFormSubmitHandle = (userData: { name: string,email: string }) => {
     // Handle user form submission
     console.log('User data submitted:', userData);
     
