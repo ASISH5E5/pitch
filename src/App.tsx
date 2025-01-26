@@ -26,7 +26,7 @@ const App: React.FC = () => {
     <Routes>
     <Route path="/" element={<PitchDesk />} />
     <Route path="*" element={<NotFound />} />
-    <Route path="/slides/intro" element={<IntroSlide setSelectedSlide={function (): void {
+    <Route path="/pitch/slides/intro" element={<IntroSlide setSelectedSlide={function (): void {
             throw new Error("Function not implemented.");
           } }  />} />
     <Route path="/slides/problem" element={<ProblemSlide />} />
