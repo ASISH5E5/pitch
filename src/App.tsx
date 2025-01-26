@@ -26,13 +26,13 @@ const App: React.FC = () => {
     <Routes>
     <Route path="/" element={<PitchDesk />} />
     <Route path="*" element={<NotFound />} />
-    <Route path="/pitch/slides/intro" element={<IntroSlide setSelectedSlide={function (): void {
+    <Route path="/slides/intro" element={<IntroSlide setSelectedSlide={function (): void {
             throw new Error("Function not implemented.");
           } }  />} />
     <Route path="/slides/problem" element={<ProblemSlide />} />
     <Route path="/slides/solution" element={<SolutionSlide />} />
-    <Route path="/pitch/slides/team" element={<TeamSlide />} />
-    <Route path="/pitch/slides/market-size" element={<MarketSlide />} />
+    <Route path="/slides/team" element={<TeamSlide />} />
+    <Route path="/slides/market-size" element={<MarketSlide />} />
     <Route path="/pitch/slides/traction" element={<TractionSlide />} />
     <Route path="/pitch/slides/gtm" element={<GTMStrategy />} />
     <Route path="/pitch/slides/future" element={<VCDashboard />} />

@@ -28,7 +28,7 @@ export const PitchDesk: React.FC = () => {
   const [isCompact, setIsCompact] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
   const [isFirstVisit, setIsFirstVisit] = useState(true);
-  const [selectedSlide, setSelectedSlide] = useState("/pitch/slides/intro");
+  const [selectedSlide, setSelectedSlide] = useState("/pith/slides/intro");
   const sidebarRef = useRef(null);
 
   // Check for first visit using localStorage
