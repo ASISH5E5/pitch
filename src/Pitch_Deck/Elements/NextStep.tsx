@@ -5,31 +5,17 @@ import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import data from '../ElementsData/data.json';
 
-// Interfaces for data and state management
-interface Option {
-  action: string;
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-}
-
-interface NextSlideData {
-  options: Option[];
-}
+type SelectedAction = 'schedule' | 'info' | 'feedback' | 'pass' | null;
 
 interface FormData {
   [key: string]: string;
 }
 
-type SelectedAction = 'schedule' | 'info' | 'feedback' | 'pass' | null;
-type SubmittedState = boolean;
-
 const VCActionSubmission: React.FC = () => {
-  const { options }: NextSlideData = data.NextSlide; // Assuming `data.NextSlide` follows this structure
-
+  const { options } = data.NextSlide; // Assuming data structure is correct
   const [selectedAction, setSelectedAction] = useState<SelectedAction>(null);
   const [formData, setFormData] = useState<FormData>({});
-  const [submitted, setSubmitted] = useState<SubmittedState>(false);
+  const [submitted, setSubmitted] = useState<boolean>(false);
 
   useEffect(() => {
     if (selectedAction === 'schedule') {
@@ -44,7 +30,7 @@ const VCActionSubmission: React.FC = () => {
     }
   }, [selectedAction]);
 
-  const handleAction = (action: string) => {
+  const handleAction = (action: SelectedAction) => {
     setSelectedAction(action);
     setFormData({});
     setSubmitted(false);
@@ -57,7 +43,7 @@ const VCActionSubmission: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
     try {
       const response = await fetch(
         "https://api.sheetbest.com/sheets/cab78403-b139-4965-8b7a-beb7e3cdd581",
@@ -78,8 +64,12 @@ const VCActionSubmission: React.FC = () => {
       } else {
         alert("Failed to submit data.");
       }
-    } catch (error) {
-      alert("Error submitting data: " + error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        alert("Error submitting data: " + error.message);
+      } else {
+        alert("Error submitting data: An unknown error occurred");
+      }
     }
   };
 
@@ -105,7 +95,7 @@ const VCActionSubmission: React.FC = () => {
               style={{ minWidth: "320px", height: "700px" }}
             ></div>
             <Button 
-              onClick={handleSubmit} 
+              onClick={(e) => handleSubmit(e as React.FormEvent<HTMLFormElement>)} 
               className="w-full bg-black text-white hover:bg-black"
             >
               Confirm Schedule
