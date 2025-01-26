@@ -6,7 +6,7 @@ import { UserModal } from './UserForm';
 import IntroSlide from './Elements/IntroSlide';
 
 const mainNavigationItems = [
-  { title: "Problem", showInCompact: true, url: "/pitch/slides/problem" },
+  { title: "Problem", showInCompact: true, url: "/pitch/slides/intro" },
   { title: "Solution", showInCompact: true, url: "/pitch/slides/solution" },
   { title: "Team", showInCompact: false, url: "/slides/team" },
   { title: "Market Size", showInCompact: true, url: "/pitch/slides/market-size" },
@@ -28,7 +28,7 @@ export const PitchDesk: React.FC = () => {
   const [isCompact, setIsCompact] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
   const [isFirstVisit, setIsFirstVisit] = useState(true);
-  const [selectedSlide, setSelectedSlide] = useState("/pitch/pitch/slides/problem");
+  const [selectedSlide, setSelectedSlide] = useState("/pitch/slides/problem");
   const sidebarRef = useRef(null);
 
   // Check for first visit using localStorage
