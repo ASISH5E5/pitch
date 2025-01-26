@@ -20,7 +20,7 @@ const VisionSlide = () => {
     }
 
     return (
-      <div className="w-full h-screen  mx-auto p-8 flex items-center justify-center bg-gradient-to-b from-white to-blue-50">
+      <div className="w-[90%] h-screen  mx-auto p-8 flex items-center justify-center bg-gradient-to-b from-white to-blue-50">
           <div className="space-y-16">
         {/* Vision Statement */}
         <div className="relative">

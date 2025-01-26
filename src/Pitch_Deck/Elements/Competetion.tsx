@@ -197,7 +197,7 @@ const LMSDashboard: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 w-[97%] mx-auto">
       <div className="bg-blue-50 p-4 rounded-lg mb-4">
         <p className="text-sm text-blue-800">
           Select companies to compare with Enligence. Currently selected: {selectedCompanies.length > 0 ? selectedCompanies.join(', ') : 'None'}

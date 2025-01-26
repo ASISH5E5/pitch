@@ -8,7 +8,7 @@ import data from '../ElementsData/data.json'
 const VCDashboard = () => {
   const {timelineData,lineDataKeys,barDataKeys,assumptions}=data.WhereSlide
   return (
-    <div className=" w-full mx-auto ">
+    <div className=" w-[97%] mx-auto ">
       <Card className="bg-gradient-to-br from-blue-50 to-white mb-6">
         <CardHeader>
           <CardTitle className="text-2xl font-bold">Investment Growth Potential</CardTitle>

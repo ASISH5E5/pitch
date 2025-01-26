@@ -63,9 +63,9 @@ export const UserModal: React.FC<UserModalProps> = ({
   </Label>
   <Input 
     id="email" 
-    type="email"  // Add the email type for validation
-    value={email}  // Bind to the 'email' state variable
-    onChange={(e) => setEmail(e.target.value)}  // Update the email value
+    type="email"  
+    value={email}  
+    onChange={(e) => setEmail(e.target.value)}  
     className="col-span-3 rounded-lg" 
     placeholder="Enter your email"
   />

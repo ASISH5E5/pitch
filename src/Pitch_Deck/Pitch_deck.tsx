@@ -1,6 +1,6 @@
 import React, { useState, useRef, useMemo, useEffect } from 'react';  
 import { Switch } from '@/components/ui/switch';
-import { X, Menu, ChevronLeft, ChevronRight } from "lucide-react"; 
+import { X, Menu, ChevronLeft, ChevronRight, Home } from "lucide-react"; 
 import { Button } from '@/components/ui/button';
 import { UserModal } from './UserForm';
 import IntroSlide from './Elements/IntroSlide';
@@ -44,7 +44,7 @@ export const PitchDesk: React.FC = () => {
   const [isFirstVisit, setIsFirstVisit] = useState(true);
   const [selectedSlide, setSelectedSlide] = useState("/pitch/slides/intro");
   const sidebarRef = useRef(null);
-
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   // Check for first visit using localStorage
   useEffect(() => {
     const hasVisitedBefore = localStorage.getItem('pitchDeckFirstVisit');
@@ -74,7 +74,11 @@ export const PitchDesk: React.FC = () => {
 
   const handleSlideClick = (url: string) => {
     setSelectedSlide(url);
+    if (isMobile) {
+      setIsOpen(false);
+    }
   };
+  
 
   const handleNavigation = (direction: string) => {
     const currentIndex = allNavigationItems.findIndex(item => item.url === selectedSlide);
@@ -93,8 +97,25 @@ export const PitchDesk: React.FC = () => {
     ? appendixItems.filter(item => item.showInCompact)
     : appendixItems;
 
-  const sidebarWidth = "20%";
+    const sidebarWidth = isMobile ? (isOpen ? "70%" : "0") : "20%";
   const showAppendixSection = visibleAppendixItems.length > 0;
+
+
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth <= 768;
+      setIsMobile(mobile);
+      // Automatically close sidebar on mobile
+      if (mobile) {
+        setIsOpen(false);
+      }
+    };
+  
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Initial check
+  
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <div className="flex h-screen  w-full">
@@ -120,8 +141,9 @@ export const PitchDesk: React.FC = () => {
           ref={sidebarRef}
           style={{ width: sidebarWidth }}
           className={`
-            fixed top-0 left-0 h-full bg-white
+            fixed top-0 left-0 h-full bg-white z-50
             transition-transform duration-300 ease-in-out 
+            ${isMobile ? 'w-[70%]' : 'w-[20%]'}
             ${isOpen ? 'translate-x-0' : '-translate-x-full'}
             flex flex-col shadow-lg
           `}
@@ -170,12 +192,12 @@ export const PitchDesk: React.FC = () => {
             <div
               onClick={() => handleSlideClick("/pitch/slides/intro")}
               className={`
-                w-full p-3 text-gray-600 flex items-center justify-between text-base cursor-pointer
+                w-full p-3 text-gray-600 flex  items-center position-fixed justify-between text-base cursor-pointer
                 transition-colors 
                 ${selectedSlide === "/pitch/slides/intro" ? 'pl-4 bg-blue-200 rounded-sm text-blue-600 border border-blue-100' : ''}
               `}
             >
-              <span className="truncate">Intro Slide</span>
+             <span className="justify-start items-left truncate">Intro Slide</span>
             </div>
             
             {/* Main Navigation Items */}
@@ -227,7 +249,7 @@ export const PitchDesk: React.FC = () => {
         <div className="relative w-full h-screen w-auto mx-auto">
           <Button
             variant="ghost"
-            className="absolute left-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-white/80 hover:bg-white shadow-md rounded-full p-2"
+            className="sticky left-0 top-1/2 -translate-y-1/2 position-static translate-x-4 z-10 bg-white/80 hover:bg-white shadow-md rounded-full p-2"
             onClick={() => handleNavigation('prev')}
             disabled={selectedSlide === "/pitch/slides/intro"}
           >
@@ -236,12 +258,13 @@ export const PitchDesk: React.FC = () => {
 
           <Button
             variant="ghost"
-            className="absolute right-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white/80 hover:bg-white shadow-md rounded-full p-2"
+            className="fixed right-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white/80 hover:bg-white shadow-md rounded-full p-2"
             onClick={() => handleNavigation('next')}
             disabled={selectedSlide === allNavigationItems[allNavigationItems.length - 1].url}
           >
             <ChevronRight className="h-6 w-6" />
           </Button>
+          <div className='w-[93%] mx-auto'>
           {selectedSlide === "/pitch/slides/intro" ? (
  <IntroSlide setSelectedSlide={setSelectedSlide} />
 ) : selectedSlide === "/pitch/slides/problem" ? (
@@ -273,6 +296,7 @@ export const PitchDesk: React.FC = () => {
 ) : (
  <NotFound />
 )}
+</div>
         </div>
       </div>
     </div>
