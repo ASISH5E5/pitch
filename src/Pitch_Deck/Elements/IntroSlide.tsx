@@ -34,7 +34,7 @@ const IntroSlide: React.FC<IntroSlideProps> = ({ setSelectedSlide }) => {
         <div className="flex flex-col items-center gap-4">
           <Button
             className="bg-blue-600 text-white hover:bg-blue-700 px-8 py-6 text-lg"
-            onClick={() => setSelectedSlide("/pitch/slides/problem")}
+            onClick={() => setSelectedSlide("/slides/problem")}
           >
             Explore The Problem
           </Button>
