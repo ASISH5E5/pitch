@@ -21,7 +21,7 @@ import Founders from "./Pitch_Deck/Elements/Founders";
 
 const App: React.FC = () => {
     return( 
-    <HashRouter >
+    <HashRouter basename="/pitch">
     <Routes>
     <Route path="/pitch" element={<PitchDesk />} />
     <Route path="*" element={<NotFound />} />
