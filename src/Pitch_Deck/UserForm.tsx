@@ -75,7 +75,7 @@ export const UserModal: React.FC<UserModalProps> = ({
           <Button 
             type="submit" 
             onClick={handleSubmit}
-            disabled={!name.trim() || !username.trim()}
+            disabled={!name.trim() || !email.trim()}
             className='bg-blue-400'
           >
             Save changes
