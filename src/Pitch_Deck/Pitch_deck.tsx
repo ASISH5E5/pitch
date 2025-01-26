@@ -4,11 +4,25 @@ import { X, Menu, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from '@/components/ui/button';
 import { UserModal } from './UserForm';
 import IntroSlide from './Elements/IntroSlide';
+import ProblemSlide from './Elements/Problem';
+import SolutionSlide from './Elements/Solutions';
+import TeamSlide from './Elements/Team';
+import MarketSlide from './Elements/Market';
+import TractionSlide from './Elements/Traction';
+import GTMStrategy from './Elements/GTM';
+import VCDashboard from './Elements/Where';
+import VisionSlide from './Elements/Vision';
+import FundraisingAsk from './Elements/Ourask';
+import VCActionSubmission from './Elements/NextStep';
+import WhyNowAnalysis from './Elements/WhyNow';
+import BusinessModel from './Elements/BusinessModel';
+import LMSDashboard from './Elements/Competetion';
+import NotFound from '@/NotFound';
 
 const mainNavigationItems = [
-  { title: "Problem", showInCompact: true, url: "/pitch/slides/intro" },
+  { title: "Problem", showInCompact: true, url: "/pitch/slides/problem" },
   { title: "Solution", showInCompact: true, url: "/pitch/slides/solution" },
-  { title: "Team", showInCompact: false, url: "/slides/team" },
+  { title: "Team", showInCompact: false, url: "/pitch/slides/team" },
   { title: "Market Size", showInCompact: true, url: "/pitch/slides/market-size" },
   { title: "Competition", showInCompact: false, url: "/pitch/slides/competetion" },
   { title: "GTM", showInCompact: false, url: "/pitch/slides/gtm" },
@@ -28,7 +42,7 @@ export const PitchDesk: React.FC = () => {
   const [isCompact, setIsCompact] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
   const [isFirstVisit, setIsFirstVisit] = useState(true);
-  const [selectedSlide, setSelectedSlide] = useState("/pitch/slides/problem");
+  const [selectedSlide, setSelectedSlide] = useState("/pitch/slides/intro");
   const sidebarRef = useRef(null);
 
   // Check for first visit using localStorage
@@ -229,13 +243,35 @@ export const PitchDesk: React.FC = () => {
             <ChevronRight className="h-6 w-6" />
           </Button>
           {selectedSlide === "/pitch/slides/intro" ? (
-  <IntroSlide setSelectedSlide={setSelectedSlide} />
+ <IntroSlide setSelectedSlide={setSelectedSlide} />
+) : selectedSlide === "/pitch/slides/problem" ? (
+ <ProblemSlide />
+) : selectedSlide === "/pitch/slides/solution" ? (
+ <SolutionSlide />
+) : selectedSlide === "/pitch/slides/team" ? (
+ <TeamSlide />
+) : selectedSlide === "/pitch/slides/market-size" ? (
+ <MarketSlide />
+) : selectedSlide === "/pitch/slides/traction" ? (
+ <TractionSlide />
+) : selectedSlide === "/pitch/slides/gtm" ? (
+ <GTMStrategy />
+) : selectedSlide === "/pitch/slides/future" ? (
+ <VCDashboard />
+) : selectedSlide === "/pitch/slides/vision" ? (
+ <VisionSlide />
+) : selectedSlide === "/pitch/slides/our-ask" ? (
+ <FundraisingAsk />
+) : selectedSlide === "/pitch/slides/next-step" ? (
+ <VCActionSubmission />
+) : selectedSlide === "/pitch/slides/whynow" ? (
+ <WhyNowAnalysis />
+) : selectedSlide === "/pitch/slides/business" ? (
+ <BusinessModel />
+) : selectedSlide === "/pitch/slides/competetion" ? (
+ <LMSDashboard />
 ) : (
-  <iframe
-    src={selectedSlide}
-    className="mx-auto w-full h-full border-none"
-    title="Slide Content"
-  />
+ <NotFound />
 )}
         </div>
       </div>
