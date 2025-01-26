@@ -20,21 +20,22 @@ const VisionSlide = () => {
     }
 
     return (
-      <div className="space-y-16 mt-12 h-screen my-auto">
+      <div className="w-full h-screen  mx-auto p-8 flex items-center justify-center bg-gradient-to-b from-white to-blue-50">
+          <div className="space-y-16">
         {/* Vision Statement */}
         <div className="relative">
           <div className="w-full mx-auto text-center space-y-3">
             {mainStatement.map((line, lineIndex) => (
               <div
                 key={lineIndex}
-                className="flex justify-center  items-center text-4xl md:text-5xl font-light "
+                className="flex justify-center items-center text-4xl md:text-5xl font-light"
               >
                 {line.words.map((word, wordIndex) => (
                   <span
                     key={`${lineIndex}-${wordIndex}`}
-                    className={`transition-all w-full duration-1000 transform whitespace-pre
-                      ${word.highlight ? "text-blue-600 font-medium" : "text-gray-700"}
-                      ${animate ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}
+                    className={`transition-all duration-1000 transform whitespace-pre
+                      ${word.highlight ? 'text-blue-600 font-medium' : 'text-gray-700'}
+                      ${animate ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}
                     `}
                     style={{ transitionDelay: `${(lineIndex * 3 + wordIndex) * 100}ms` }}
                   >
@@ -52,19 +53,20 @@ const VisionSlide = () => {
         </div>
         {/* Call to Action */}
         <div
-          className={`text-center transition-all duration-700 transform ${
-            animate ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-          }`}
-          style={{ transitionDelay: "1200ms" }}
+          className={`text-center transition-all duration-700 transform
+            ${animate ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}
+          `}
+          style={{ transitionDelay: '1200ms' }}
         >
-          <Button
+      <Button
             onClick={() => setShowGPSAnalogy(true)}
-            className="bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-medium inline-flex items-center gap-2 hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl"
+            className="bg-blue-600 h-12 text-white px-8 py-4 rounded-full text-lg font-medium inline-flex items-center gap-2 hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl"
           >
             Explore the GPS Analogy
             <ChevronRight className="w-5 h-5" />
           </Button>
         </div>
+      </div>
       </div>
     );
   };

@@ -21,15 +21,15 @@ import Founders from "./Pitch_Deck/Elements/Founders";
 
 const App: React.FC = () => {
     return( 
-    <BrowserRouter basename="/pitch">
+    <BrowserRouter >
     <Routes>
     <Route path="/" element={<PitchDesk />} />
     <Route path="*" element={<NotFound />} />
     <Route path="/slides/intro" element={<IntroSlide setSelectedSlide={function (): void {
             throw new Error("Function not implemented.");
           } }  />} />
-    <Route path="/slides/problem" element={<ProblemSlide />} />
-    <Route path="/slides/solution" element={<SolutionSlide />} />
+    <Route path="/problem" element={<ProblemSlide />} />
+    <Route path="/solution" element={<SolutionSlide />} />
     <Route path="/slides/team" element={<TeamSlide />} />
     <Route path="/slides/market-size" element={<MarketSlide />} />
     <Route path="/slides/traction" element={<TractionSlide />} />

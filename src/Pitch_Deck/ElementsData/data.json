@@ -519,19 +519,19 @@
   
 },
 "VisionSlide":{
-  "mainStatement": [
+ "mainStatement": [
     {
       "line": 1,
       "words": [
         { "text": "Empower ", "highlight": true },
-        { "text": "people to thrive", "highlight": false }
+        { "text": "people", "highlight": false }
       ]
     },
     {
       "line": 2,
       "words": [
         
-        { "text": " in their careers and live their ", "highlight": false }
+        { "text": "to thrive in their careers and live their ", "highlight": false }
        
       ]
     },
