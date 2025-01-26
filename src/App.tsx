@@ -1,8 +1,7 @@
 import { BrowserRouter, Route,Routes } from "react-router-dom";
 import PitchDesk from "./Pitch_Deck/Pitch_deck";
 import ProblemSlide from "./Pitch_Deck/Elements/Problem";
-import SolutionSlide from "./Pitch_Deck/Elements/Solutions";
-import TeamSlide from "./Pitch_Deck/Elements/Team";
+
 import MarketSlide from "./Pitch_Deck/Elements/Market";
 import TractionSlide from "./Pitch_Deck/Elements/Traction";
 // import GTMStrategy from "./Pitch_Deck/Elements/GTM";
@@ -30,8 +29,7 @@ const App: React.FC = () => {
             throw new Error("Function not implemented.");
           } }  />} />
     <Route path="/slides/problem" element={<ProblemSlide />} />
-    <Route path="/slides/solution" element={<SolutionSlide />} />
-    <Route path="/slides/team" element={<TeamSlide />} />
+
     <Route path="/slides/market-size" element={<MarketSlide />} />
     <Route path="/pitch/slides/traction" element={<TractionSlide />} />
     <Route path="/pitch/slides/gtm" element={<GTMStrategy />} />
