@@ -28,23 +28,23 @@ const App: React.FC = () => {
     <Route path="/slides/intro" element={<IntroSlide setSelectedSlide={function (): void {
             throw new Error("Function not implemented.");
           } }  />} />
-    <Route path="/slides/problem" element={<ProblemSlide />} />
-    <Route path="/slides/solution" element={<SolutionSlide />} />
-    <Route path="/slides/team" element={<TeamSlide />} />
-    <Route path="/slides/market-size" element={<MarketSlide />} />
-    <Route path="/slides/traction" element={<TractionSlide />} />
-    <Route path="/slides/gtm" element={<GTMStrategy />} />
-    <Route path="/slides/future" element={<VCDashboard />} />
-    <Route path="/slides/vision" element={<VisionSlide />} />
-    <Route path="/slides/our-ask" element={<FundraisingAsk />} />
-    <Route path="/slides/next-step" element={<Nextstep />} />
-    <Route path="/slides/whynow" element={<WhyNowAnalysis />} />
-    <Route path="/slides/business" element={<BusinessModel/>} />
-    <Route path="/slides/competetion" element={<LMSDashboard/>} />
-    <Route path="/slides/founders" element={<Founders onBack={function (): void {
+    <Route path="/pitch/slides/problem" element={<ProblemSlide />} />
+    <Route path="/pitch/slides/solution" element={<SolutionSlide />} />
+    <Route path="/pitch/slides/team" element={<TeamSlide />} />
+    <Route path="/pitch/slides/market-size" element={<MarketSlide />} />
+    <Route path="/pitch/slides/traction" element={<TractionSlide />} />
+    <Route path="/pitch/slides/gtm" element={<GTMStrategy />} />
+    <Route path="/pitch/slides/future" element={<VCDashboard />} />
+    <Route path="/pitch/slides/vision" element={<VisionSlide />} />
+    <Route path="/pitch/slides/our-ask" element={<FundraisingAsk />} />
+    <Route path="/pitch/slides/next-step" element={<Nextstep />} />
+    <Route path="/pitch/slides/whynow" element={<WhyNowAnalysis />} />
+    <Route path="/pitch/slides/business" element={<BusinessModel/>} />
+    <Route path="/pitch/slides/competetion" element={<LMSDashboard/>} />
+    <Route path="/pitch/slides/founders" element={<Founders onBack={function (): void {
             throw new Error("Function not implemented.");
           } }/>} />
-    <Route path="/slides/gps" element={<GPSAnalogy onBack={function (): void {
+    <Route path="/pitch/slides/gps" element={<GPSAnalogy onBack={function (): void {
             throw new Error("Function not implemented.");
           } }/>} />
 

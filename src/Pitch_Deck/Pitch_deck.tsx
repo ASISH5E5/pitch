@@ -6,22 +6,22 @@ import { UserModal } from './UserForm';
 import IntroSlide from './Elements/IntroSlide';
 
 const mainNavigationItems = [
-  { title: "Problem", showInCompact: true, url: "/slides/problem" },
-  { title: "Solution", showInCompact: true, url: "/slides/solution" },
-  { title: "Team", showInCompact: false, url: "/slides/team" },
-  { title: "Market Size", showInCompact: true, url: "/slides/market-size" },
-  { title: "Competition", showInCompact: false, url: "/slides/competetion" },
-  { title: "GTM", showInCompact: false, url: "/slides/gtm" },
-  { title: "Traction", showInCompact: true, url: "/slides/traction" },
-  { title: "Our Ask", showInCompact: true, url: "/slides/our-ask" },
-  { title: "Where This Can Go", showInCompact: false, url: "/slides/future" },
-  { title: "Vision", showInCompact: false, url: "/slides/vision" },
-  { title: "Next Steps", showInCompact: true, url: "/slides/next-step" },
+  { title: "Problem", showInCompact: true, url: "/pitch/slides/problem" },
+  { title: "Solution", showInCompact: true, url: "/pitch/slides/solution" },
+  { title: "Team", showInCompact: false, url: "/pitch/slides/team" },
+  { title: "Market Size", showInCompact: true, url: "/pitch/slides/market-size" },
+  { title: "Competition", showInCompact: false, url: "/pitch/slides/competetion" },
+  { title: "GTM", showInCompact: false, url: "/pitch/slides/gtm" },
+  { title: "Traction", showInCompact: true, url: "/pitch/slides/traction" },
+  { title: "Our Ask", showInCompact: true, url: "/pitch/slides/our-ask" },
+  { title: "Where This Can Go", showInCompact: false, url: "/pitch/slides/future" },
+  { title: "Vision", showInCompact: false, url: "/pitch/slides/vision" },
+  { title: "Next Steps", showInCompact: true, url: "/pitch/slides/next-step" },
 ];
 
 const appendixItems = [
-  { title: "Why This Why Now", showInCompact: false, url: "/slides/whynow" },
-  { title: "Business Model", showInCompact: false, url: "/slides/business" }
+  { title: "Why This Why Now", showInCompact: false, url: "/pitch/slides/whynow" },
+  { title: "Business Model", showInCompact: false, url: "/pitch/slides/business" }
 ];
 
 export const PitchDesk: React.FC = () => {
