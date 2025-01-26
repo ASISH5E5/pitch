@@ -6,7 +6,7 @@ import { UserModal } from './UserForm';
 import IntroSlide from './Elements/IntroSlide';
 
 const mainNavigationItems = [
-  { title: "Problem", showInCompact: true, url: "/problem" },
+  { title: "Problem", showInCompact: true, url: "/pitch/slides/problem" },
   { title: "Solution", showInCompact: true, url: "/solution" },
   { title: "Team", showInCompact: false, url: "/slides/team" },
   { title: "Market Size", showInCompact: true, url: "/pitch/slides/market-size" },
