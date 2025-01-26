@@ -7,13 +7,20 @@ import data from '../ElementsData/data.json';
 
 type SelectedAction = 'schedule' | 'info' | 'feedback' | 'pass' | null;
 
+interface Option {
+  action: SelectedAction; // Ensure action is one of 'schedule', 'info', 'feedback', 'pass', or null
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+}
+
 interface FormData {
   [key: string]: string;
 }
 
 const VCActionSubmission: React.FC = () => {
-  const { options } = data.NextSlide; // Assuming data structure is correct
-  const [selectedAction, setSelectedAction] = useState<SelectedAction>(null);
+  const { options } = data.NextSlide as { options: Option[] };
+    const [selectedAction, setSelectedAction] = useState<SelectedAction>(null);
   const [formData, setFormData] = useState<FormData>({});
   const [submitted, setSubmitted] = useState<boolean>(false);
 
@@ -95,7 +102,7 @@ const VCActionSubmission: React.FC = () => {
               style={{ minWidth: "320px", height: "700px" }}
             ></div>
             <Button 
-              onClick={(e) => handleSubmit(e as React.FormEvent<HTMLFormElement>)} 
+              onClick={(e) => handleSubmit(e as unknown as React.FormEvent<HTMLFormElement>)} 
               className="w-full bg-black text-white hover:bg-black"
             >
               Confirm Schedule
@@ -194,7 +201,7 @@ const VCActionSubmission: React.FC = () => {
               {options.map((option) => (
                 <button
                   key={option.action}
-                  onClick={() => handleAction(option.action)}
+                  onClick={() => handleAction(option.action)} // Now TypeScript knows it's a SelectedAction
                   className={`p-3 rounded-lg transition-all hover:scale-102 ${selectedAction === option.action
                     ? 'bg-blue-100 border border-blue-500 shadow-sm'
                     : 'bg-white hover:bg-gray-50 border border-gray-200'}`}
