@@ -1,4 +1,4 @@
-import { BrowserRouter, Route,Routes } from "react-router-dom";
+import {HashRouter, Route,Routes } from "react-router-dom";
 import PitchDesk from "./Pitch_Deck/Pitch_deck";
 import ProblemSlide from "./Pitch_Deck/Elements/Problem";
 import SolutionSlide from "./Pitch_Deck/Elements/Solutions";
@@ -21,14 +21,14 @@ import Founders from "./Pitch_Deck/Elements/Founders";
 
 const App: React.FC = () => {
     return( 
-    <BrowserRouter >
+    <HashRouter >
     <Routes>
     <Route path="/pitch" element={<PitchDesk />} />
     <Route path="*" element={<NotFound />} />
-    <Route path="/slides/intro" element={<IntroSlide setSelectedSlide={function (): void {
+    <Route path="/pitch/slides/intro" element={<IntroSlide setSelectedSlide={function (): void {
             throw new Error("Function not implemented.");
           } }  />} />
-    <Route path="/slides/problem" element={<ProblemSlide />} />
+    <Route path="/pitch/slides/problem" element={<ProblemSlide />} />
     <Route path="/pitch/slides/solution" element={<SolutionSlide />} />
     <Route path="/pitch/slides/team" element={<TeamSlide />} />
     <Route path="/pitch/slides/market-size" element={<MarketSlide />} />
@@ -51,7 +51,7 @@ const App: React.FC = () => {
 
 
   </Routes>
-  </BrowserRouter>
+  </HashRouter>
   );
 }
 export default App;
