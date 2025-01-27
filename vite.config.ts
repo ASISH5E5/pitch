@@ -9,7 +9,7 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"), // Alias for src directory
     },
   },
-  base: "/",  // GitHub Pages requires this base path
+  base: "/pitch",  // GitHub Pages requires this base path
   build: {
     outDir: "dist",  // Make sure the build output is in the 'dist' folder
   },
