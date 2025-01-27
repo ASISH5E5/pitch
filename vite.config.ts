@@ -6,11 +6,11 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"), // Alias for src directory
+      "@": path.resolve(__dirname, "./src"),
     },
   },
-  base: "/pitch/",  // GitHub Pages requires this base path
+  base: "/pitch/",  // Correct base path for GitHub Pages
   build: {
-    outDir: "dist",  // Make sure the build output is in the 'dist' folder
+    outDir: "dist",  // Output folder should be 'dist'
   },
 })
