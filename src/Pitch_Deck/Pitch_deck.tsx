@@ -1,6 +1,6 @@
 import React, { useState, useRef, useMemo, useEffect } from 'react';  
 import { Switch } from '@/components/ui/switch';
-import { X, Menu, ChevronLeft, ChevronRight, Home } from "lucide-react"; 
+import { X, Menu, ChevronLeft, ChevronRight} from "lucide-react"; 
 import { Button } from '@/components/ui/button';
 import { UserModal } from './UserForm';
 import IntroSlide from './Elements/IntroSlide';

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Info } from 'lucide-react';
 import { TrendingUp, AlertTriangle, DollarSign, BookOpen, Users, Clock } from 'lucide-react';
