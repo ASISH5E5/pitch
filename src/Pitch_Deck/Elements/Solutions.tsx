@@ -27,7 +27,7 @@ const SolutionSlide = () => {
     <div className="w-[100%] mx-auto p-4">
       <Card className="bg-gradient-to-br from-blue-50 to-white">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold">{solutiontype}</CardTitle> {/* Display solutiontype here */}
+          <CardTitle className="text-2xl font-bold">AI-Powered Skill Navigation Platform</CardTitle> {/* Display solutiontype here */}
           <p className="text-gray-600 mt-4">{solution}</p>
         </CardHeader>
         <CardContent>
