@@ -16,7 +16,7 @@ const iconMapping: { [key: string]: JSX.Element } = {
 };
 
 const SolutionSlide = () => {
-  const { solution,features, impactAreas }: SolutionSlideData = data.SolutionSlide;
+  const { solutiontype, solution, features, impactAreas }: SolutionSlideData = data.SolutionSlide;
   const [showAnalogy, setShowAnalogy] = useState(false); // State for GPSAnalogy visibility
 
   if (showAnalogy) {
@@ -28,9 +28,7 @@ const SolutionSlide = () => {
       <Card className="bg-gradient-to-br from-blue-50 to-white">
         <CardHeader>
           <CardTitle className="text-2xl font-bold">Our Solution</CardTitle>
-          <p className="text-gray-600 mt-4">
-           {solution}
-          </p>
+          <p className="text-gray-600 mt-4">{solution}</p>
         </CardHeader>
         <CardContent>
           <div className="relative">
@@ -88,7 +86,7 @@ const SolutionSlide = () => {
                           </div>
                           <div className="flex items-center text-sm gap-2">
                             <span className="text-red-500 font-medium">{impact.traditional}</span>
-                            {iconMapping.ArrowRight} 
+                            {iconMapping.ArrowRight}
                             <span className="text-green-500 font-medium">{impact.enligence}</span>
                           </div>
                         </div>

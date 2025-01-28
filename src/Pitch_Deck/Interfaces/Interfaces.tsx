@@ -43,11 +43,8 @@ export interface ProblemSlideData {
 
 {/* Solution Slide datatypes*/}
 
-
-export interface solutiontype{
-  solution:string
-}
-
+// src/Interfaces/Interfaces.ts
+// src/Interfaces/Interfaces.ts
 
 export interface Feature {
   icon: string;
@@ -65,12 +62,12 @@ export interface ImpactArea {
   color: string;
 }
 
-  export interface SolutionSlideData {
-    solutiontype:string;
-    features: Feature[]; 
-    impactAreas: ImpactArea[]; 
-  }
-  
+export interface SolutionSlideData {
+  solutiontype: string;  // solutiontype is now required
+  solution: string;
+  features: Feature[];
+  impactAreas: ImpactArea[];
+}
 
 
   {/* Team Slide datatypes*/}

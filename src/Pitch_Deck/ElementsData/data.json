@@ -72,8 +72,9 @@
         }
       ]
     },
-  "SolutionSlide": {
-    "solution":"Our skill navigation platform uniquely combines Generative AI with a robust learning framework to address common L&D challenges. By automating time-consuming processes, personalizing the learning path for each employee, and constantlyadapting to new training needs, Enligence minimizes time and resource investment while maximising skill identification & acquisition.",
+ "SolutionSlide": {
+    "solutiontype": "AI-Powered Skill Navigation Platform",
+    "solution": "Our skill navigation platform uniquely combines Generative AI with a robust learning framework to address common L&D challenges. By automating time-consuming processes, personalizing the learning path for each employee, and constantly adapting to new training needs, Enligence minimizes time and resource investment while maximising skill identification & acquisition.",
     "features": [
       {
         "icon": "Brain",
