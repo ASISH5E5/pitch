@@ -1,17 +1,14 @@
-
-
 import { TrendingUp, Target, Building2, ArrowUpRight, Info } from 'lucide-react';
 import data from "../ElementsData/data.json"
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 
 const BusinessModel = () => {
-
   type IconKey = keyof typeof iconMapping;
-
-
 const {pricingTiers,metrics}=data.BusinessSlide;
 
-  // Define the icon mapping for icons
+type PricingTiersType = typeof pricingTiers;
+
+
   const iconMapping = {
     TrendingUp: <TrendingUp className="w-6 h-6" />,
     Target: <Target className="w-6 h-6" />,
@@ -20,46 +17,35 @@ const {pricingTiers,metrics}=data.BusinessSlide;
     Info: <Info className="w-4 h-4 text-gray-400 hover:text-blue-600" />
   };
 
+
+
   return (
     <div className="w-[98%] mx-auto">
-      <div className="grid grid-cols-2 min-h-[300px]">
-        {/* Corporate Section */}
-        <div className="p-8 bg-gradient-to-br from-blue-50 to-white border-r">
-          <div className="flex items-center gap-3 mb-6">
-            {iconMapping[pricingTiers.corporate.icon as IconKey]}
-            <div className='flex-1 justify-end'>
-              <h2 className="text-2xl font-bold text-gray-900">{pricingTiers.corporate.title}</h2>
-              <div className="text-3xl font-bold text-blue-600 mt-1">{pricingTiers.corporate.price}</div>
-            </div>
-          </div>
-          <div className="space-y-4 ml-12">
-            {pricingTiers.corporate.features.map((feature, index) => (
-              <div key={index} className="flex items-start text-lg text-gray-700">
-                <span className="text-blue-600 mr-3 text-xl">•</span>
-                {feature}
-              </div>
-            ))}
+   <div className="grid grid-cols-2 min-h-[300px]">
+  {Object.keys(pricingTiers).map((key) => {
+    const tier = pricingTiers[key as keyof PricingTiersType];
+    return (
+      <div key={key} className="p-8 bg-gradient-to-br from-blue-50 to-white border-r">
+        <div className="flex items-center gap-3 mb-6">
+          {iconMapping[tier.icon as IconKey]}
+          <div className="flex-1 justify-end">
+            <h2 className="text-2xl font-bold text-gray-900">{tier.title}</h2>
+            <div className="text-3xl font-bold text-blue-600 mt-1">{tier.price}</div>
           </div>
         </div>
-        <div className="p-8 bg-gradient-to-br from-blue-50 to-white border-r">
-          <div className="flex items-center gap-3 mb-6">
-            {iconMapping[pricingTiers.corporate.icon as IconKey]}
-            <div className='flex-1 justify-end'>
-              <h2 className="text-2xl font-bold text-gray-900">{pricingTiers.Individual.title}</h2>
-              <div className="text-3xl font-bold text-blue-600 mt-1">{pricingTiers.Individual.price}</div>
+        <div className="space-y-4 ml-12">
+          {tier.features.map((feature, index) => (
+            <div key={index} className="flex items-start text-lg text-gray-700">
+              <span className="text-blue-600 mr-3 text-xl">•</span>
+              {feature}
             </div>
-          </div>
-          <div className="space-y-4 ml-12">
-            {pricingTiers.corporate.features.map((feature, index) => (
-              <div key={index} className="flex items-start text-lg text-gray-700">
-                <span className="text-blue-600 mr-3 text-xl">•</span>
-                {feature}
-              </div>
-            ))}
-          </div>
+          ))}
         </div>
       </div>
-      
+    );
+  })}
+</div>
+
 
       {/* Metrics Section */}
       <div className="p-8 bg-white border-t">
@@ -92,7 +78,7 @@ const {pricingTiers,metrics}=data.BusinessSlide;
             {metrics.keyMetrics.map((metric, index) => (
               <div key={index} className="bg-white p-6 rounded-lg shadow-sm border">
                 <div className="flex items-center gap-2 text-blue-600 mb-2">
-                  {iconMapping[metric.icon as IconKey]} {/* Render icon dynamically */}
+                  {iconMapping[metric.icon as IconKey]}
                   <span className="font-medium">{metric.title}</span>
                 </div>
                 <div className="text-2xl font-bold">{metric.value}</div>

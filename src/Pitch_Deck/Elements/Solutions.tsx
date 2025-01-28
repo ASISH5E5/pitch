@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import { ArrowRight, Brain, CheckCircle, Shield, Target, TrendingUp, Users } from 'lucide-react';
 import data from '../ElementsData/data.json';
-import GPSAnalogy from './GPSAnalogy'; // Import GPSAnalogy component
+import GPSAnalogy from './GPSAnalogy';
 import { SolutionSlideData } from '../Interfaces/Interfaces';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
-// Define the icon mapping
 const iconMapping: { [key: string]: JSX.Element } = {
   Users: <Users className="w-6 h-6" />,
   Brain: <Brain className="w-6 h-6" />,
@@ -17,10 +16,9 @@ const iconMapping: { [key: string]: JSX.Element } = {
 };
 
 const SolutionSlide = () => {
-  const { features, impactAreas }: SolutionSlideData = data.SolutionSlide;
+  const { solution,features, impactAreas }: SolutionSlideData = data.SolutionSlide;
   const [showAnalogy, setShowAnalogy] = useState(false); // State for GPSAnalogy visibility
 
-  // When showAnalogy is true, show GPSAnalogy component
   if (showAnalogy) {
     return <GPSAnalogy onBack={() => setShowAnalogy(false)} />;
   }
@@ -31,9 +29,7 @@ const SolutionSlide = () => {
         <CardHeader>
           <CardTitle className="text-2xl font-bold">Our Solution</CardTitle>
           <p className="text-gray-600 mt-4">
-            Our skill navigation platform uniquely combines Generative AI with a robust learning framework to address common L&D challenges.
-            By automating time-consuming processes, personalizing the learning path for each employee, and constantly
-            adapting to new training needs, Enligence minimizes time and resource investment while maximising skill identification & acquisition.
+           {solution}
           </p>
         </CardHeader>
         <CardContent>
@@ -55,7 +51,7 @@ const SolutionSlide = () => {
                       <div className="hidden group-hover:block absolute top-1/2 -right-8 w-3 h-3 border-t-2 border-r-2 border-blue-400 transform rotate-45 -translate-y-1/2" />
                       <div className="flex items-center gap-4">
                         <div className={`p-3 rounded-full bg-${feature.color}-50 text-${feature.color}-600 flex-shrink-0`}>
-                          {iconMapping[feature.icon]} {/* Use icon mapping */}
+                          {iconMapping[feature.icon]}
                         </div>
                         <div>
                           <h3 className="font-bold mb-1">{feature.title}</h3>
@@ -81,7 +77,7 @@ const SolutionSlide = () => {
                       <div className="hidden group-hover:block absolute top-1/2 -left-10 w-3 h-3 border-t-2 border-r-2 border-blue-400 transform rotate-45 -translate-y-1/2" />
                       <div className="flex items-center">
                         <div className={`mr-3 p-2 rounded-full bg-${impact.color}-50 flex-shrink-0`}>
-                          {iconMapping[impact.icon]} {/* Use icon mapping */}
+                          {iconMapping[impact.icon]}
                         </div>
                         <div className="flex-grow">
                           <div className="flex items-center justify-between mb-1">
@@ -92,7 +88,7 @@ const SolutionSlide = () => {
                           </div>
                           <div className="flex items-center text-sm gap-2">
                             <span className="text-red-500 font-medium">{impact.traditional}</span>
-                            {iconMapping.ArrowRight} {/* Use icon mapping */}
+                            {iconMapping.ArrowRight} 
                             <span className="text-green-500 font-medium">{impact.enligence}</span>
                           </div>
                         </div>
@@ -107,9 +103,9 @@ const SolutionSlide = () => {
           <div className="mt-12 text-center">
             <button
               className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 flex items-center gap-2 mx-auto"
-              onClick={() => setShowAnalogy(true)} // Show the GPS Analogy on click
+              onClick={() => setShowAnalogy(true)}
             >
-              {iconMapping.Target} {/* Use icon mapping */}
+              {iconMapping.Target}
               Explore the GPS Analogy
             </button>
           </div>

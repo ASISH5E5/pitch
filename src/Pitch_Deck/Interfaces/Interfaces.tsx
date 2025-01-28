@@ -1,21 +1,53 @@
+{/* Intro Slide Data types */}
+
+export interface IntroSlideProps {
+  setSelectedSlide: (slide: string) => void;
+}
+export interface IntroSlideContent {
+  title: string;
+  subtitle: string;
+}
+
+export interface IntroSlideData {
+  IntroSlide: {
+    content: IntroSlideContent[];
+  };
+}
+
 {/*ProblemSlide datatypes */}
-export interface Stat {
-  text: string;
-  source: string;
+
+export interface problemtype{
+  problem:string
+}
+
+// src/Interfaces/Interfaces.ts
+export interface KeyStat {
+  text: string | React.ReactNode;
+  source: string | React.ReactNode;
   link: string;
 }
 
 export interface BottomStat {
   text: string;
   source: string;
-  link: string; 
+  link: string;
 }
-  export interface ProblemSlideData {
-    keyStats: Stat[]; 
-    bottomStat: BottomStat; 
-  }
-  
+
+export interface ProblemSlideData {
+  problem: string;
+  keyStats: KeyStat[];
+  bottomStat: BottomStat[];
+}
+
+
+
 {/* Solution Slide datatypes*/}
+
+
+export interface solutiontype{
+  solution:string
+}
+
 
 export interface Feature {
   icon: string;
@@ -34,6 +66,7 @@ export interface ImpactArea {
 }
 
   export interface SolutionSlideData {
+    solutiontype:string;
     features: Feature[]; 
     impactAreas: ImpactArea[]; 
   }
@@ -274,10 +307,11 @@ export interface Competitor {
   weaknesses: string;
 }
 
+
+
 // FeatureSupport interface defines support for each feature by company
 export interface FeatureSupport {
-  [key: string]: boolean;  // Company name as key and a boolean to indicate support for that feature
-}
+  [key: string]: boolean;  
 
 // Features1 interface defines features with the support data for each company
 export interface Features1 {

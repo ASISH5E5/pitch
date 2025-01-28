@@ -1,43 +1,79 @@
 {
 
   "Pitch-Deck":{
+    
+      "mainNavigationItems": [
+        { "title": "Problem", "showInCompact": true, "url": "/pitch/slides/problem" },
+        { "title": "Solution", "showInCompact": true, "url": "/pitch/slides/solution" },
+        { "title": "Team", "showInCompact": false, "url": "/pitch/slides/team" },
+        { "title": "Market Size", "showInCompact": true, "url": "/pitch/slides/market-size" },
+        { "title": "Competition", "showInCompact": false, "url": "/pitch/slides/competition" },
+        { "title": "GTM", "showInCompact": false, "url": "/pitch/slides/gtm" },
+        { "title": "Traction", "showInCompact": true, "url": "/pitch/slides/traction" },
+        { "title": "Our Ask", "showInCompact": true, "url": "/pitch/slides/our-ask" },
+        { "title": "Where This Can Go", "showInCompact": false, "url": "/pitch/slides/future" },
+        { "title": "Vision", "showInCompact": false, "url": "/pitch/slides/vision" },
+        { "title": "Next Steps", "showInCompact": true, "url": "/pitch/slides/next-step" }
+      ],
+      "appendixItems": [
+        { "title": "Why This Why Now", "showInCompact": false, "url": "/pitch/slides/why-now" },
+        { "title": "Business Model", "showInCompact": false, "url": "/pitch/slides/business" }
+      ]
+    
+  },
 
-  },
-  "ProblemSlide": {
-    "keyStats": [
+
+ "IntroSlide": {
+    "content": [
       {
-        "text": "The world will need to reskill more than 1 billion people by 2030 because of technology-led changes in the workplace.",
-        "source": "WEF, 2020A",
-        "link": "https://www.weforum.org/agenda/2020/01/reskilling-revolution-jobs-future-skills/"
-      },
-      {
-        "text": "44% of workers' skills will be disrupted by 2028",
-        "source": "World Economic Forum, Future of Jobs report 2023",
-        "link": "https://www3.weforum.org/docs/WEF_Future_of_Jobs_2023.pdf"
-      },
-      {
-        "text": "58% of the workforce needs new skills to get their jobs done.",
-        "source": "Gartner, 2021",
-        "link": "https://www.gartner.com/en/newsroom/press-releases/2021-02-03-gartner-hr-research-finds-fifty-eight-percent-of-the-workforce-will-need-new-skill-sets-to-do-their-jobs-successfully"
-      },
-      {
-        "text": "Between 2022 and 2023, more than 45% of hirers on LinkedIn explicitly used skills data to fill their roles, up 12% year over year. Roughly one in five job postings (19%) in the US no longer requires degrees, up from 15% in 2021.",
-        "source": "LinkedIn, 2023",
-        "link": "https://economicgraph.linkedin.com/content/dam/me/economicgraph/en-us/PDF/skills-first-report-2023.pdf"
-      },
-      {
-        "text": "Only 10% of HR executives say they effectively classify and organize skills into a skills taxonomy or framework-although nearly all (85%) have some efforts underway.",
-        "source": "Deloitte, 2022B",
-        "link": "https://www2.deloitte.com/content/dam/Deloitte/global/Documents/Deloitte-Skills-Based-Organization.pdf"
+        "title": "ENLIGENCE",
+        "subtitle": "Like GPS is to Physical Navigation, Enligence is for Skill Navigation"
       }
-    ],
-    "bottomStat": {
-      "text": "94% of employees would stay longer at a company that invests in personalized learning",
-      "source": "LinkedIn Workplace Learning Report 2018",
-      "link": "https://learning.linkedin.com/resources/workplace-learning-report-2018?src=li-scin&veh=7010d000001BicLAASv2&cid=7010d000001BicLAAS&bf=1"
-    }
+    ]
   },
+
+
+
+
+    "ProblemSlide": {
+      "problem": "With 1 billion people needing reskilling by 2030 and 58% of workers requiring new skills now, companies face two critical challenges: Effectively identifying required skills (only 10% have proper frameworks), and creating learning content is expensive ($1000+/hour) and slow (40-100 hours), often becoming obsolete upon deployment.",
+      "keyStats": [
+        {
+          "text": "The world will need to reskill more than 1 billion people by 2030 because of technology-led changes in the workplace.",
+          "source": "WEF, 2020A",
+          "link": "https://www.weforum.org/agenda/2020/01/reskilling-revolution-jobs-future-skills/"
+        },
+        {
+          "text": "44% of workers' skills will be disrupted by 2028",
+          "source": "World Economic Forum, Future of Jobs report 2023",
+          "link": "https://www3.weforum.org/docs/WEF_Future_of_Jobs_2023.pdf"
+        },
+        {
+          "text": "58% of the workforce needs new skills to get their jobs done.",
+          "source": "Gartner, 2021",
+          "link": "https://www.gartner.com/en/newsroom/press-releases/2021-02-03-gartner-hr-research-finds-fifty-eight-percent-of-the-workforce-will-need-new-skill-sets-to-do-their-jobs-successfully"
+        },
+        {
+          "text": "Between 2022 and 2023, more than 45% of hirers on LinkedIn explicitly used skills data to fill their roles, up 12% year over year. Roughly one in five job postings (19%) in the US no longer requires degrees, up from 15% in 2021.",
+          "source": "LinkedIn, 2023",
+          "link": "https://economicgraph.linkedin.com/content/dam/me/economicgraph/en-us/PDF/skills-first-report-2023.pdf"
+        },
+        {
+          "text": "Only 10% of HR executives say they effectively classify and organize skills into a skills taxonomy or framework-although nearly all (85%) have some efforts underway.",
+          "source": "Deloitte, 2022B",
+          "link": "https://www2.deloitte.com/content/dam/Deloitte/global/Documents/Deloitte-Skills-Based-Organization.pdf"
+        }
+      ],
+      "bottomStat": [
+        {
+          "text": "94% of employees would stay longer at a company that invests in personalized learning",
+          "source": "LinkedIn Workplace Learning Report 2018",
+          "link": "https://learning.linkedin.com/resources/workplace-learning-report-2018?src=li-scin&veh=7010d000001BicLAASv2&cid=7010d000001BicLAAS&bf=1"
+        }
+      ]
+    },
   "SolutionSlide": {
+    "solution":"Our skill navigation platform uniquely combines Generative AI with a robust learning framework to address common L&D challenges. By automating time-consuming processes, personalizing the learning path for each employee, and constantlyadapting to new training needs, Enligence minimizes time and resource investment while maximising skill identification & acquisition.",
     "features": [
       {
         "icon": "Brain",

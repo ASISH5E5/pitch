@@ -1,4 +1,4 @@
-import React, { useState, useRef, useMemo, useEffect } from 'react';  
+import React, { useState,  useMemo, useEffect } from 'react';  
 import { Switch } from '@/components/ui/switch';
 import { X, Menu, ChevronLeft, ChevronRight } from "lucide-react"; 
 import { Button } from '@/components/ui/button';
@@ -18,34 +18,33 @@ import WhyNowAnalysis from './Elements/WhyNow';
 import BusinessModel from './Elements/BusinessModel';
 import LMSDashboard from './Elements/Competetion';
 import NotFound from '@/NotFound';
+import data from './ElementsData/data.json'
 
-const mainNavigationItems = [
-  { title: "Problem", showInCompact: true, url: "/pitch/slides/problem" },
-  { title: "Solution", showInCompact: true, url: "/pitch/slides/solution" },
-  { title: "Team", showInCompact: false, url: "/pitch/slides/team" },
-  { title: "Market Size", showInCompact: true, url: "/pitch/slides/market-size" },
-  { title: "Competition", showInCompact: false, url: "/pitch/slides/competetion" },
-  { title: "GTM", showInCompact: false, url: "/pitch/slides/gtm" },
-  { title: "Traction", showInCompact: true, url: "/pitch/slides/traction" },
-  { title: "Our Ask", showInCompact: true, url: "/pitch/slides/our-ask" },
-  { title: "Where This Can Go", showInCompact: false, url: "/pitch/slides/future" },
-  { title: "Vision", showInCompact: false, url: "/pitch/slides/vision" },
-  { title: "Next Steps", showInCompact: true, url: "/pitch/slides/next-step" },
-];
-
-const appendixItems = [
-  { title: "Why This Why Now", showInCompact: false, url: "/pitch/slides/whynow" },
-  { title: "Business Model", showInCompact: false, url: "/pitch/slides/business" }
-];
 
 export const PitchDesk: React.FC = () => {
+const {mainNavigationItems,appendixItems}=data['Pitch-Deck'];
   const [isCompact, setIsCompact] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
   const [isFirstVisit, setIsFirstVisit] = useState(true);
   const [selectedSlide, setSelectedSlide] = useState("/pitch/slides/intro");
-  const sidebarRef = useRef(null);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-  // Check for first visit using localStorage
+
+
+  const slidesMapping: Record<string, React.ReactNode> = {
+    '/pitch/slides/intro': <IntroSlide setSelectedSlide={setSelectedSlide} />,
+    '/pitch/slides/problem': <ProblemSlide />,
+    '/pitch/slides/solution': <SolutionSlide />,
+    '/pitch/slides/team': <TeamSlide />,
+    '/pitch/slides/market-size': <MarketSlide />,
+    '/pitch/slides/traction': <TractionSlide />,
+    '/pitch/slides/gtm': <GTMStrategy />,
+    '/pitch/slides/future': <VCDashboard />,
+    '/pitch/slides/vision': <VisionSlide />,
+    '/pitch/slides/our-ask': <FundraisingAsk />,
+    '/pitch/slides/next-step': <VCActionSubmission />,
+    '/pitch/slides/why-now': <WhyNowAnalysis />,
+    '/pitch/slides/business': <BusinessModel />,
+    '/pitch/slides/competition': <LMSDashboard />,
+  };
   useEffect(() => {
     const hasVisitedBefore = localStorage.getItem('pitchDeckFirstVisit');
     if (hasVisitedBefore) {
@@ -54,10 +53,7 @@ export const PitchDesk: React.FC = () => {
   }, []);
 
   const userFormSubmitHandle = (userData: { name: string,email: string }) => {
-    // Handle user form submission
     console.log('User data submitted:', userData);
-    
-    // Mark that the user has visited
     localStorage.setItem('pitchDeckFirstVisit', 'true');
     setIsFirstVisit(false);
   };
@@ -70,13 +66,11 @@ export const PitchDesk: React.FC = () => {
       ...mainNavigationItems,
       ...appendixItems
     ];
-  }, []);
+  }, [appendixItems, mainNavigationItems]);
 
   const handleSlideClick = (url: string) => {
     setSelectedSlide(url);
-    if (isMobile) {
-      setIsOpen(false);
-    }
+   
   };
   
 
@@ -97,25 +91,10 @@ export const PitchDesk: React.FC = () => {
     ? appendixItems.filter(item => item.showInCompact)
     : appendixItems;
 
-    const sidebarWidth = isMobile ? (isOpen ? "70%" : "0") : "20%";
+    const sidebarWidth =  "20%";
   const showAppendixSection = visibleAppendixItems.length > 0;
 
 
-  useEffect(() => {
-    const handleResize = () => {
-      const mobile = window.innerWidth <= 768;
-      setIsMobile(mobile);
-      // Automatically close sidebar on mobile
-      if (mobile) {
-        setIsOpen(false);
-      }
-    };
-  
-    window.addEventListener('resize', handleResize);
-    handleResize(); // Initial check
-  
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   return (
     <div className="flex h-screen  w-full">
@@ -123,9 +102,7 @@ export const PitchDesk: React.FC = () => {
         isOpen={isFirstVisit}
         onSubmit={userFormSubmitHandle}
         onClose={() => setIsFirstVisit(false)}
-        
       />
-
       <div className="relative w-full" style={{ width: sidebarWidth, flexShrink: 0 }}>
         {!isOpen && (
           <Button
@@ -136,14 +113,12 @@ export const PitchDesk: React.FC = () => {
             <Menu className="h-6 w-6" />
           </Button>
         )}
-        
         <div
-          ref={sidebarRef}
           style={{ width: sidebarWidth }}
           className={`
             fixed top-0 left-0 h-full bg-white z-50
             transition-transform duration-300 ease-in-out 
-            ${isMobile ? 'w-[70%]' : 'w-[20%]'}
+            ${'w-[20%]'}
             ${isOpen ? 'translate-x-0' : '-translate-x-full'}
             flex flex-col shadow-lg
           `}
@@ -158,7 +133,7 @@ export const PitchDesk: React.FC = () => {
 
           <div className="flex flex-col p-4">
             <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center space-x-3 gap-1">
+              <div className="flex items-center space-x-2 gap-1">
                 <div
                   className="w-10 h-10 rounded-lg flex-shrink-0"
                   style={{
@@ -176,7 +151,7 @@ export const PitchDesk: React.FC = () => {
               <Switch
                 checked={isCompact}
                 onCheckedChange={setIsCompact}
-                className="relative inline-flex h-[24px] w-[44px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-blue-600 data-[state=unchecked]:bg-gray-200"
+                className="relative inline-flex h-[24px] w-[44px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-black data-[state=unchecked]:bg-gray-200"
               >
                 <span
                   className={`pointer-events-none block h-5 w-5 rounded-full bg-white shadow-lg ring-0 transition-transform duration-200 ease-in-out ${
@@ -188,7 +163,6 @@ export const PitchDesk: React.FC = () => {
           </div>
 
           <div className="flex-1 overflow-y-auto ">
-            {/* Intro Slide - Always visible */}
             <div
               onClick={() => handleSlideClick("/pitch/slides/intro")}
               className={`
@@ -199,8 +173,6 @@ export const PitchDesk: React.FC = () => {
             >
              <span className="justify-start items-left truncate">Intro Slide</span>
             </div>
-            
-            {/* Main Navigation Items */}
             {visibleMainItems.map((item, index) => (
               <div
                 key={index}
@@ -266,37 +238,7 @@ export const PitchDesk: React.FC = () => {
             <ChevronRight className="h-6 w-6" />
           </Button>
           <div className='w-[93%] mx-auto h-[90%]'>
-          {selectedSlide === "/pitch/slides/intro" ? (
- <IntroSlide setSelectedSlide={setSelectedSlide} />
-) : selectedSlide === "/pitch/slides/problem" ? (
- <ProblemSlide />
-) : selectedSlide === "/pitch/slides/solution" ? (
- <SolutionSlide />
-) : selectedSlide === "/pitch/slides/team" ? (
- <TeamSlide />
-) : selectedSlide === "/pitch/slides/market-size" ? (
- <MarketSlide />
-) : selectedSlide === "/pitch/slides/traction" ? (
- <TractionSlide />
-) : selectedSlide === "/pitch/slides/gtm" ? (
- <GTMStrategy />
-) : selectedSlide === "/pitch/slides/future" ? (
- <VCDashboard />
-) : selectedSlide === "/pitch/slides/vision" ? (
- <VisionSlide />
-) : selectedSlide === "/pitch/slides/our-ask" ? (
- <FundraisingAsk />
-) : selectedSlide === "/pitch/slides/next-step" ? (
- <VCActionSubmission />
-) : selectedSlide === "/pitch/slides/whynow" ? (
- <WhyNowAnalysis />
-) : selectedSlide === "/pitch/slides/business" ? (
- <BusinessModel />
-) : selectedSlide === "/pitch/slides/competetion" ? (
- <LMSDashboard />
-) : (
- <NotFound />
-)}
+          <div className="h-full">{slidesMapping[selectedSlide] || <NotFound />}</div>
 </div>
         </div>
       </div>

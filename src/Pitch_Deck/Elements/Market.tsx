@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { Card,CardContent,CardHeader,CardTitle } from '@/components/ui/card';
-
 import { ResponsiveContainer, Tooltip, FunnelChart, Funnel,  LabelList } from 'recharts';
-
 import data from "../ElementsData/data.json"
 import { MarketSegmentKey, MarketSlideData,FunnelDataItem ,CustomTooltipProps} from '../Interfaces/Interfaces';
 import MarketAnalysis from './SupplementarySlide';

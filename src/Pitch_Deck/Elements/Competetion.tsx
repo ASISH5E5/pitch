@@ -3,11 +3,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Check, X } from 'lucide-react';
 import { LMSDashboardData } from '../Interfaces/Interfaces';
 import data from '../ElementsData/data.json';
-
-// Destructure LMSDashboardData
 const { features, allCompetitors }: LMSDashboardData = data.CompetitionSlide;
 
-// Typing the props for CompetitorList component
 interface CompetitorListProps {
   selectedCompanies: string[];
   onCompanySelect: (companyName: string | 'selectAll' | 'clear') => void;
