@@ -6,9 +6,9 @@ import NotFound from "./NotFound";
 
 const App: React.FC = () => {
     return( 
-    <BrowserRouter basename="/pitch">
+    <BrowserRouter basename="/pitch/">
     <Routes>
-    <Route path="/pitch" element={<PitchDesk />} />
+    <Route path="/" element={<PitchDesk />} />
     <Route path="*" element={<NotFound />} />
     
 
