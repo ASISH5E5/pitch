@@ -216,7 +216,7 @@ const VCActionSubmission: React.FC = () => {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-4">
+    <div className="w-full h-full mx-auto p-4">
       <Card className="bg-gradient-to-br from-blue-50 to-white">
         <CardContent className="p-8">
           <div className="min-h-80">
@@ -226,11 +226,11 @@ const VCActionSubmission: React.FC = () => {
                 <button
                   key={option.action}
                   onClick={() => handleAction(option.action)}
-                  className={`p-3 rounded-lg transition-all hover:scale-102 ${selectedAction === option.action
+                  className={`p-3 rounded-lg  transition-all hover:scale-102 ${selectedAction === option.action
                     ? 'bg-blue-100 border border-blue-500 shadow-sm'
                     : 'bg-white hover:bg-gray-50 border border-gray-200'}`}
                 >
-                  <div className="flex flex-col items-center text-center space-y-2">
+                  <div className="flex flex-col  items-center text-center space-y-2">
                     <div className="text-blue-600">
                       {iconMapping[option.action as Exclude<SelectedAction, null>]}
                     </div>

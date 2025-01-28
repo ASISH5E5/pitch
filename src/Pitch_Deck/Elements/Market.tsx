@@ -9,11 +9,12 @@ import MarketAnalysis from './SupplementarySlide';
 
 
 
+
 const MarketSlide = () => {
   const [activeSegment, setActiveSegment] = useState<MarketSegmentKey>('tam');
 const {marketData,assumptions,icpPoints,ldPoints} :MarketSlideData=data.MarketSlide
+const [supplementary,setSupplementary]=useState(false);
 
-const [supplementary, setSupplementary] = useState(false);
 
 if (supplementary) {
   return <MarketAnalysis onBack={() => setSupplementary(false)} />;
@@ -162,16 +163,16 @@ if (supplementary) {
             </div>
           </div>
           <div className="mt-6 flex justify-center">
-            <button
-              onClick={() => setSupplementary(true)}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium flex items-center gap-2 transition-colors duration-200"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-              View Supplementary Market Data
-            </button>
-          </div>
+        <button
+          onClick={() => setSupplementary(true)}
+          className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium flex items-center gap-2 transition-colors duration-200"
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+          View Supplementary Market Data
+        </button>
+      </div>
         </CardContent>
       </Card>
     </div>

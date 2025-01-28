@@ -1,6 +1,6 @@
 import React, { useState, useRef, useMemo, useEffect } from 'react';  
 import { Switch } from '@/components/ui/switch';
-import { X, Menu, ChevronLeft, ChevronRight, Home } from "lucide-react"; 
+import { X, Menu, ChevronLeft, ChevronRight } from "lucide-react"; 
 import { Button } from '@/components/ui/button';
 import { UserModal } from './UserForm';
 import IntroSlide from './Elements/IntroSlide';
@@ -187,12 +187,12 @@ export const PitchDesk: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex-1 overflow-y-auto mx-2">
+          <div className="flex-1 overflow-y-auto ">
             {/* Intro Slide - Always visible */}
             <div
               onClick={() => handleSlideClick("/pitch/slides/intro")}
               className={`
-                w-full p-3 text-gray-600 flex  items-center position-fixed justify-between text-base cursor-pointer
+                w-full p-3 text-gray-600 flex   items-center position-fixed justify-between text-base cursor-pointer
                 transition-colors 
                 ${selectedSlide === "/pitch/slides/intro" ? 'pl-4 bg-blue-200 rounded-sm text-blue-600 border border-blue-100' : ''}
               `}
@@ -239,8 +239,9 @@ export const PitchDesk: React.FC = () => {
       </div>
 
       {/* Main Content Area */}
+      
       <div 
-        className="flex-1 w-full mx-auto h-full"
+        className="relative overflow-visible flex-1 w-full mx-auto h-screen"
         style={{ 
           marginLeft: isOpen ? '0' : `-${sidebarWidth}`,
           transition: 'margin-left 300ms ease-in-out'
@@ -264,7 +265,7 @@ export const PitchDesk: React.FC = () => {
           >
             <ChevronRight className="h-6 w-6" />
           </Button>
-          <div className='w-[93%] mx-auto'>
+          <div className='w-[93%] mx-auto h-[90%]'>
           {selectedSlide === "/pitch/slides/intro" ? (
  <IntroSlide setSelectedSlide={setSelectedSlide} />
 ) : selectedSlide === "/pitch/slides/problem" ? (

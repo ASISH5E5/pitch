@@ -15,7 +15,7 @@ const IntroSlide: React.FC<IntroSlideProps> = ({ setSelectedSlide }) => {
   }
 
   return (
-    <div className="w-full h-screen mx-auto flex items-center justify-center">
+    <div className="w-full min-w-full h-full mx-auto flex items-center justify-center">
       <div className="w-full space-y-12 text-center">
         {/* Logo and Company Name */}
         <div className="space-y-2">

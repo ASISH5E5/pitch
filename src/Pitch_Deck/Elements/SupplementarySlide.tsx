@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Info } from 'lucide-react';
 import { TrendingUp, AlertTriangle, DollarSign, BookOpen, Users, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { FaArrowLeft } from 'react-icons/fa6';
 
-const MarketAnalysis = () => {
+interface MarketAnalysisProps {
+  onBack: () => void;
+}
+
+const MarketAnalysis: React.FC<MarketAnalysisProps> = ({ onBack }) => {
   const categories = {
     skill_gap: {
       title: "Growing Skill Gap Problem",
@@ -86,14 +90,13 @@ const MarketAnalysis = () => {
     );
   };
 
-  const onBack = () => {
-    // Implement navigation or functionality for going back
-    console.log('Back button clicked');
-  };
-
   return (
-    <div className="w-full  mx-auto p-4">
-      <Button variant="ghost" className="mb-8 text-blue-600" onClick={onBack}>
+    <div className="w-full mx-auto p-4">
+      <Button 
+        variant="ghost" 
+        className="mb-8 text-blue-600" 
+        onClick={onBack}  // Use the onBack prop directly
+      >
         <FaArrowLeft className="mr-2 h-4 w-4" />
         Back
       </Button>

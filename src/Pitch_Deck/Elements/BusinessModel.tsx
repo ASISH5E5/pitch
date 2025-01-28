@@ -21,7 +21,7 @@ const {pricingTiers,metrics}=data.BusinessSlide;
   };
 
   return (
-    <div className="w-full mx-auto">
+    <div className="w-[98%] mx-auto">
       <div className="grid grid-cols-2 min-h-[300px]">
         {/* Corporate Section */}
         <div className="p-8 bg-gradient-to-br from-blue-50 to-white border-r">

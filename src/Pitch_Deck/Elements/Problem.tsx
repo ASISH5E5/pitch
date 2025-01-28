@@ -19,7 +19,7 @@ const ProblemSlide = () => {
   };
 
   return (
-    <div className="w-[95%]  mx-auto p-2 mt-4">
+    <div className="w-[99%]  mx-auto p-2 mt-4">
       <Card className="shadow-sm">
         <CardHeader className="text-center pb-4 pt-4 bg-blue-50">
           <CardTitle className="text-xl font-semibold text-gray-600 mb-2">The Problem</CardTitle>
