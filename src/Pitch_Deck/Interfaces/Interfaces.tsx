@@ -308,10 +308,10 @@ export interface Competitor {
 }
 
 
-
 // FeatureSupport interface defines support for each feature by company
 export interface FeatureSupport {
-  [key: string]: boolean;  
+  [key: string]: boolean;  // Company name as key and a boolean to indicate support for that feature
+}
 
 // Features1 interface defines features with the support data for each company
 export interface Features1 {
