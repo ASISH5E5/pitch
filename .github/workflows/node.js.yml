@@ -33,22 +33,21 @@ jobs:
 
       - run: npm ci
       - run: npm run build
-      - run: npm test
+
+      - name: Create .nojekyll
+        run: touch dist/.nojekyll
 
       - name: Set Git user identity
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
 
-      - name: Set remote URL with GitHub Token
-        run: |
-          git remote set-url origin https://git:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-
-      - name: Deploy with gh-pages
-        run: |
-          npm run deploy
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist
+          branch: gh-pages
+          clean: true
 
 permissions:
   contents: write

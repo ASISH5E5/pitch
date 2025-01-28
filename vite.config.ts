@@ -9,8 +9,21 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  base: "/pitch/",  // Correct base path for GitHub Pages
+  base: "/pitch/",
   build: {
-    outDir: "dist",  // Output folder should be 'dist'
+    outDir: "dist",
+    rollupOptions: {
+      output: {
+        // Ensure proper MIME types for chunks
+        chunkFileNames: 'assets/[name]-[hash].js',
+        entryFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash].[ext]'
+      }
+    }
   },
+  server: {
+    headers: {
+      'Content-Type': 'application/javascript'
+    }
+  }
 })
