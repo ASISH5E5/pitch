@@ -207,8 +207,8 @@ export const PitchDesk: React.FC = () => {
                 onClick={() => handleSlideClick(item.url)}
                 className={`
                   w-full p-3 text-gray-600 flex items-center justify-between text-base cursor-pointer
-                  transition-colors 
-                  ${selectedSlide === item.url ? 'pl-4 bg-blue-200 rounded-lg text-blue-600 border border-blue-100' : ''}
+                  transition-colors border border-transparent
+                  ${selectedSlide === item.url ? ' bg-blue-200 rounded-lg text-blue-600 border border-blue-100' : ''}
                 `}
               >
                 <span className="truncate">{item.title}</span>
