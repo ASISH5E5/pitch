@@ -27,7 +27,7 @@ const Founders = ({ onBack }: { onBack: () => void }) => {
     }
   ];
   return (
-    <div className="w-full min-h-screen bg-white p-8">
+    <div className="w-[100%] h-full mx-auto items-center justify-center mr-12">
          <Button variant="ghost" className="mb-8 text-blue-600" onClick={onBack}>
           <FaArrowLeft className="mr-2 h-4 w-4" />
           Back

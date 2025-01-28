@@ -26,7 +26,7 @@ const SolutionSlide = () => {
   }
 
   return (
-    <div className="w-full mx-auto p-4">
+    <div className="w-[100%] mx-auto p-4">
       <Card className="bg-gradient-to-br from-blue-50 to-white">
         <CardHeader>
           <CardTitle className="text-2xl font-bold">Our Solution</CardTitle>

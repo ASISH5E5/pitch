@@ -5,7 +5,11 @@ import { TrendingUp, AlertTriangle, DollarSign, BookOpen, Users, Clock } from 'l
 import { Button } from '@/components/ui/button';
 import { FaArrowLeft } from 'react-icons/fa6';
 
-const MarketAnalysis = () => {
+interface MarketAnalysisProps {
+  onBack: () => void;
+}
+
+const MarketAnalysis: React.FC<MarketAnalysisProps> = ({ onBack }) => {
   const categories = {
     skill_gap: {
       title: "Growing Skill Gap Problem",
@@ -71,7 +75,7 @@ const MarketAnalysis = () => {
         <div className="text-xl font-bold text-blue-600">{value}</div>
         <div className="text-sm text-gray-600 pr-6">{label}</div>
         <div
-          className="absolute top-2 right-2 cursor-pointer"
+          className="relative top-2 right-2 cursor-pointer"
           onMouseEnter={() => setShowTooltip(true)}
           onMouseLeave={() => setShowTooltip(false)}
         >
@@ -86,14 +90,13 @@ const MarketAnalysis = () => {
     );
   };
 
-  const onBack = () => {
-    // Implement navigation or functionality for going back
-    console.log('Back button clicked');
-  };
-
   return (
-    <div className="w-full  mx-auto p-4">
-      <Button variant="ghost" className="mb-8 text-blue-600" onClick={onBack}>
+    <div className="w-full mx-auto p-4">
+      <Button 
+        variant="ghost" 
+        className="mb-8 text-blue-600" 
+        onClick={onBack}  // Use the onBack prop directly
+      >
         <FaArrowLeft className="mr-2 h-4 w-4" />
         Back
       </Button>

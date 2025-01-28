@@ -216,21 +216,21 @@ const VCActionSubmission: React.FC = () => {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-4">
+    <div className="w-full  mx-auto p-4">
       <Card className="bg-gradient-to-br from-blue-50 to-white">
         <CardContent className="p-8">
           <div className="min-h-80">
             <h2 className="text-xl font-bold mb-4 text-center">How Would You Like to Proceed?</h2>
-            <div className="grid grid-cols-4 gap-4">
+            <div className="grid grid-cols-4  gap-4">
               {options.map((option) => (
                 <button
                   key={option.action}
                   onClick={() => handleAction(option.action)}
-                  className={`p-3 rounded-lg transition-all hover:scale-102 ${selectedAction === option.action
+                  className={`p-8 m rounded-lg transition-all hover:scale-102 ${selectedAction === option.action
                     ? 'bg-blue-100 border border-blue-500 shadow-sm'
                     : 'bg-white hover:bg-gray-50 border border-gray-200'}`}
                 >
-                  <div className="flex flex-col items-center text-center space-y-2">
+                  <div className="flex flex-col min-h-24 items-center text-center space-y-2">
                     <div className="text-blue-600">
                       {iconMapping[option.action as Exclude<SelectedAction, null>]}
                     </div>

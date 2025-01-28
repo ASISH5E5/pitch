@@ -5,23 +5,20 @@ import { ResponsiveContainer, Tooltip, FunnelChart, Funnel,  LabelList } from 'r
 
 import data from "../ElementsData/data.json"
 import { MarketSegmentKey, MarketSlideData,FunnelDataItem ,CustomTooltipProps} from '../Interfaces/Interfaces';
-// import MarketAnalysis from './SupplementarySlide';
-
+import MarketAnalysis from './SupplementarySlide';
 
 
 const MarketSlide = () => {
   const [activeSegment, setActiveSegment] = useState<MarketSegmentKey>('tam');
 const {marketData,assumptions,icpPoints,ldPoints} :MarketSlideData=data.MarketSlide
+const [supplementary,setSupplementary]=useState(false);
 
-// const [supplementary, setSupplementary] = useState(false);
 
-// if (supplementary) {
-//   return <MarketAnalysis onBack={() => setSupplementary(false)} />;
-// }
+if (supplementary) {
+  return <MarketAnalysis onBack={() => setSupplementary(false)} />;
+}
 
   
-  
-
   const formatValue = (value: number): string => {
     return `$${value}B`;
   };
@@ -38,7 +35,7 @@ const {marketData,assumptions,icpPoints,ldPoints} :MarketSlideData=data.MarketSl
       const data = marketData[segmentKey];
       
       return (
-<div className="relative bg-white p-4 shadow-lg rounded-lg border z-10 ">
+<div className=" bg-white p-4 shadow-lg rounded-lg border ">
 <p className="font-bold">{payload[0].payload.name}</p>
           <p className="text-gray-600">{formatValue(payload[0].payload.value)}</p>
           {data.breakdown.map((item, index) => (
@@ -163,7 +160,7 @@ const {marketData,assumptions,icpPoints,ldPoints} :MarketSlideData=data.MarketSl
           </div>
           <div className="mt-6 flex justify-center">
             <button
-              // onClick={() => setSupplementary(true)}
+                onClick={() => setSupplementary(true)}
               className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium flex items-center gap-2 transition-colors duration-200"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

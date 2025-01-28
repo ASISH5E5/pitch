@@ -97,7 +97,7 @@ const FeatureComparison: React.FC<FeatureComparisonProps> = ({ selectedCompanies
   }
 
   return (
-    <Card className="w-full h-full">
+    <Card className="w-[100%] h-full">
       <CardHeader className="p-4">
         <CardTitle className="text-lg">Feature Comparison</CardTitle>
       </CardHeader>
