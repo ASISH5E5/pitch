@@ -38,8 +38,8 @@ const {marketData,assumptions,icpPoints,ldPoints} :MarketSlideData=data.MarketSl
       const data = marketData[segmentKey];
       
       return (
-        <div className="bg-white p-4 shadow-lg rounded-lg border">
-          <p className="font-bold">{payload[0].payload.name}</p>
+<div className="relative bg-white p-4 shadow-lg rounded-lg border z-10 ">
+<p className="font-bold">{payload[0].payload.name}</p>
           <p className="text-gray-600">{formatValue(payload[0].payload.value)}</p>
           {data.breakdown.map((item, index) => (
             <div key={index} className="mt-2">
@@ -62,7 +62,7 @@ const {marketData,assumptions,icpPoints,ldPoints} :MarketSlideData=data.MarketSl
         <CardContent>
           <div className="flex flex-col md:flex-row gap-8">
             <div className="flex-1 relative">
-              <div className="absolute left-0 top-8 bottom-8 flex flex-col justify-between z-10">
+              <div className="absolute left-0 top-8 bottom-8 flex flex-col justify-between z-0">
                 <div className="flex items-center">
                   <div className="mr-2 mt-24  mb-12 bg-blue-100 rounded-lg p-2 text-sm font-medium whitespace-nowrap">
                     TAM → SAM: 11.7%
@@ -79,8 +79,8 @@ const {marketData,assumptions,icpPoints,ldPoints} :MarketSlideData=data.MarketSl
               <div className="h-96 pl-36">
                 <ResponsiveContainer width="100%" height="100%">
                   <FunnelChart>
-                    <Tooltip content={<CustomTooltip />} />
-                    <Funnel
+                  <Tooltip content={<CustomTooltip  /> } />
+                  <Funnel
           data={funnelData}
           dataKey="value"
           nameKey="name"

@@ -41,7 +41,7 @@ const WhyNowAnalysis = () => {
             onMouseLeave={() => setShowMainTooltip(false)}
           >
             {showMainTooltip && (
-              <div className="absolute bg-white text-black rounded-lg bottom-full transform -translate-x-1/2 mb-2 z-10 left-1/2">
+              <div className="absolute bg-white text-black rounded-lg top-full transform  mb-2 z-20 right-1">
                 <div className="bg-white text-black rounded-lg text-sm rounded-lg p-1 whitespace-nowrap shadow-lg ">
                   <p className="text-4 bg-white text-black rounded-lg">{source}</p>
                 </div>
@@ -65,7 +65,7 @@ const WhyNowAnalysis = () => {
               onMouseLeave={() => setShowCagrTooltip(false)}
             >
               {showCagrTooltip && (
-                <div className="absolute bottom-full transform -translate-x-1/2 mb-2 z-10 left-1/2">
+                <div className="absolute bg-white text-black rounded-lg top-full transform  mb-2 z-20 right-1">
                   <div className=" text-sm rounded-lg p-2 whitespace-nowrap shadow-lg ">
                     <p className="text-sm bg-white text-black rounded-lg">{cagrSource}</p>
                   </div>
