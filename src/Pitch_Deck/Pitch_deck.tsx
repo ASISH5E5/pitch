@@ -19,6 +19,7 @@ import BusinessModel from './Elements/BusinessModel';
 import LMSDashboard from './Elements/Competetion';
 import NotFound from '@/NotFound';
 
+
 const mainNavigationItems = [
   { title: "Problem", showInCompact: true, url: "/pitch/slides/problem" },
   { title: "Solution", showInCompact: true, url: "/pitch/slides/solution" },
