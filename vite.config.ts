@@ -1,29 +1,25 @@
-import path from "path"
-import react from "@vitejs/plugin-react"
-import { defineConfig } from "vite"
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import path from 'path'
 
 export default defineConfig({
   plugins: [react()],
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-    },
-  },
-  base: "/pitch/",
+  base: '/pitch/', // Make sure this matches your repository name
   build: {
-    outDir: "dist",
+    outDir: 'dist',
+    assetsDir: 'assets',
     rollupOptions: {
       output: {
-        // Ensure proper MIME types for chunks
-        chunkFileNames: 'assets/[name]-[hash].js',
-        entryFileNames: 'assets/[name]-[hash].js',
-        assetFileNames: 'assets/[name]-[hash].[ext]'
+        entryFileNames: `assets/[name].[hash].js`,
+        chunkFileNames: `assets/[name].[hash].js`,
+        assetFileNames: `assets/[name].[hash].[ext]`
       }
-    }
+    },
+    sourcemap: true
   },
-  server: {
-    headers: {
-      'Content-Type': 'application/javascript'
-    }
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
   }
 })
