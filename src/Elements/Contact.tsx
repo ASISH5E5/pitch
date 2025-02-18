@@ -1,14 +1,16 @@
-import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 
+
+
 const ContactUs = () => {
-  const handleSubmit = (e) => {
+  const handleSubmit = (e:any) => {
     e.preventDefault();
     // Handle form submission here
     console.log('Form submitted');
     alert('Message sent successfully!');
     e.target.reset();
   };
+
 
   return (
     <div className="w-full min-h-screen bg-gray-50 py-12">
@@ -68,7 +70,7 @@ const ContactUs = () => {
                   <div>
                     <textarea
                       placeholder="Your questions..."
-                      rows="4"
+                      rows={4}
                       className="w-full p-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
                       required
                     ></textarea>

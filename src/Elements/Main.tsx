@@ -6,6 +6,20 @@ import { useTypewriter, Cursor } from 'react-simple-typewriter';
 import im1 from "../Images/port2.jpg";
 import ScrollArrow from './ArrowButton';
 
+
+interface SocialButtonProps {
+  icon: React.ComponentType<any>;
+  href: string;
+  label: string;
+  delay: number;
+   // Explicitly set the type as number
+   
+}
+interface MainProp{
+  data : boolean;
+  className?:string;
+}
+
 // AnimatedBackground Component
 const AnimatedBackground = () => {
   return (
@@ -67,9 +81,9 @@ const AnimatedBackground = () => {
 };
 
 // Loading Animation Component
-const LoadingAnimation = () => {
+const LoadingAnimation:React.FC<MainProp> = ({className}) => {
   const letters = "ASISH".split("");
-  
+  console.log(className);
   return (
     <motion.div 
       className="fixed inset-0 bg-white dark:bg-gray-900 z-50 flex items-center justify-center"
@@ -94,7 +108,7 @@ const LoadingAnimation = () => {
 };
 
 // Social Button Component
-const SocialButton = ({ icon: IconComponent, href, label, delay }) => {
+const SocialButton: React.FC<SocialButtonProps> = ({ icon: IconComponent, href, label, delay }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -123,7 +137,7 @@ const SocialButton = ({ icon: IconComponent, href, label, delay }) => {
 };
 
 // Main Component
-const Main = ({ data }) => {
+const Main:React.FC<MainProp> = ({ data }) => {
   const [showLoading, setShowLoading] = useState(true);
   
   const [head] = useTypewriter({
@@ -147,7 +161,7 @@ const Main = ({ data }) => {
         <AnimatedBackground />
         
         <AnimatePresence>
-          {showLoading && <LoadingAnimation className="font-style: italic" />}
+          {showLoading && <LoadingAnimation className="font-style: italic" data={false} />}
         </AnimatePresence>
 
         {!showLoading && (

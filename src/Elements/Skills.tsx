@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { FaReact, FaJava, FaPython, FaHtml5, FaCss3, FaGitAlt, FaGithub } from "react-icons/fa";
 import { IoLogoJavascript } from "react-icons/io";
 import { BsFileEarmarkCodeFill } from "react-icons/bs";
@@ -143,7 +143,7 @@ const HomeSkills = () => {
       </div>
 
       {/* Add custom CSS for the perspective effect */}
-      <style jsx>{`
+      <style>{`
         .perspective-1000 {
           perspective: 1000px;
         }

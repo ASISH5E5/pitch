@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from "framer-motion";
 import { useInView } from 'react-intersection-observer';
 
@@ -122,7 +121,7 @@ const Education = () => {
         </div>
       </div>
 
-      <style jsx>{`
+      <style >{`
         .path-animation {
           stroke-dasharray: 2000;
           stroke-dashoffset: 2000;
