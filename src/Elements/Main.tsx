@@ -226,7 +226,7 @@ const Main = ({ data }) => {
           </div>
         )}
       </div>
-      <ScrollArrow />
+      {!showLoading && <ScrollArrow />} 
     </>
   );
 };

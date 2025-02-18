@@ -39,11 +39,11 @@ const HomeSkills = () => {
   const isInView = useInView(ref, { once: false, amount: 0.1 });
 
   return (
-    <section className="py-16 bg-indigo-50 overflow-hidden">
-      <div className="container mx-auto px-4 md:px-8 relative">
+    <section className="py-16 bg-indigo-50 overflow-hidden min-h-screen">
+      <div className="container mx-auto px-4 md:px-8 relative my-auto ">
         {/* Left side content */}
-        <div className="flex flex-col md:flex-row">
-          <div className="md:w-1/3 mb-12 md:mb-0 pr-0 md:pr-8">
+        <div className="flex flex-col md:flex-row py-16" >
+          <div className="md:w-1/3 mb-12 md:mb-0 pr-0 md:pr-8 py-20">
             <motion.p 
               className="text-indigo-500 font-medium tracking-wider mb-3"
               initial={{ opacity: 0, y: 20 }}

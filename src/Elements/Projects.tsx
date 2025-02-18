@@ -247,7 +247,7 @@ const Projects = () => {
   return (
     <>
     <section className="py-16 bg-gradient-to-b from-white to-gray-50 min-h-screen">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4  min-h-screen">
         <div className="mb-12 text-center">
           <h2 className="text-4xl font-bold mb-4">Projects</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
@@ -255,7 +255,7 @@ const Projects = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto ">
           {displayedProjects.map((project, index) => (
             <div
               key={project.id}
@@ -322,11 +322,9 @@ const Projects = () => {
             {[...Array(totalPages)].map((_, index) => (
               <Button
                 key={index}
-                variant={currentPage === index ? "default" : "default"}
+                variant="outline"
                 onClick={() => setCurrentPage(index)}
-                className={`w-8 h-8 p-0 ${
-                  currentPage === index ? 'bg-primary  text-blue-500 border border-blue-500' : ''
-                }`}
+                className={`px-4 ${currentPage === index ? 'bg-primary text-blue-500 border border-blue-500' : ''}`}
               >
                 {index + 1}
               </Button>
@@ -343,18 +341,9 @@ const Projects = () => {
           </Button>
         </div>
       </div>
-      
-      <ProjectModal 
-        project={selectedProject}
-        isOpen={!!selectedProject}
-        onClose={() => setSelectedProject(null)}
-      />
     </section>
-    
-
-    
-    </>
-  );
+  </>
+);
 };
 
 export default Projects;
