@@ -1,6 +1,4 @@
-// src/components/Education.js
 
-import React from 'react';
 import { motion } from "framer-motion";
 import { useInView } from 'react-intersection-observer';
 import ed from '../Images/zph.jpeg';
@@ -37,7 +35,11 @@ const educationData = [
   },
 ];
 
-const Education = ({ data }) => {  // Accept the 'data' prop to toggle background color
+interface EdProp{
+  data:any;
+}
+
+const Education:React.FC<EdProp> = ({ data }) => {  // Accept the 'data' prop to toggle background color
   const { ref, inView } = useInView({
     triggerOnce: true, // Trigger animation only once
     threshold: 0.1,    // Trigger when 10% of the component is visible
