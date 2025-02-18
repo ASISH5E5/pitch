@@ -1,4 +1,4 @@
-name: Node.js CI
+name: Deploy to GitHub Pages
 
 on:
   push:
@@ -6,49 +6,64 @@ on:
   pull_request:
     branches: ["main"]
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [20.x]
-
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: "20"
           cache: "npm"
 
-      - name: Cache npm dependencies
-        uses: actions/cache@v2
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Create necessary files
+        run: |
+          touch dist/.nojekyll
+          echo '/*' > dist/_headers
+          echo '  Access-Control-Allow-Origin: *' >> dist/_headers
+          echo '  Content-Type: text/html; charset=utf-8' >> dist/_headers
+          echo '' >> dist/_headers
+          echo '/*.css' >> dist/_headers
+          echo '  Content-Type: text/css' >> dist/_headers
+          echo '' >> dist/_headers
+          echo '/*.js' >> dist/_headers
+          echo '  Content-Type: application/javascript' >> dist/_headers
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          path: dist
 
-      - run: npm ci
-      - run: npm run build
-      - run: npm test
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
-      - name: Set Git user identity
-        run: |
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions[bot]"
-
-      - name: Set remote URL with GitHub Token
-        run: |
-          git remote set-url origin https://git:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-
-      - name: Deploy with gh-pages
-        run: |
-          npm run deploy
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-permissions:
-  contents: write # Grant write permission for the GITHUB_TOKEN
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
