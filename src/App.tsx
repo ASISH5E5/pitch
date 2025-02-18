@@ -8,7 +8,7 @@ const App: React.FC = () => {
     return( 
     <BrowserRouter basename="/pitch/">
     <Routes>
-      <Route path="/pitch/" element={<Home/>}/>
+      <Route path="/" element={<Home/>}/>
     <Route path="/main" element={<Main data={false}/>}/>
     <Route path="*" element={<NotFound />} />
     
