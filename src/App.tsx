@@ -1,14 +1,15 @@
 import { BrowserRouter, Route,Routes } from "react-router-dom";
-import PitchDesk from "./Pitch_Deck/Pitch_deck";
 
 import NotFound from "./NotFound";
 
-
+import Main from './Elements/Main'
+import Home from "./Elements/Home";
 const App: React.FC = () => {
     return( 
     <BrowserRouter>
     <Routes>
-    <Route path="/" element={<PitchDesk />} />
+      <Route path="/" element={<Home/>}/>
+    <Route path="/main" element={<Main data={undefined}/>}/>
     <Route path="*" element={<NotFound />} />
     
 
