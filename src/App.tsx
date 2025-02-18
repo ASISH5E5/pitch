@@ -6,7 +6,7 @@ import Main from './Elements/Main'
 import Home from "./Elements/Home";
 const App: React.FC = () => {
     return( 
-    <BrowserRouter>
+    <BrowserRouter basename="/pitch/">
     <Routes>
       <Route path="/" element={<Home/>}/>
     <Route path="/main" element={<Main data={false}/>}/>
