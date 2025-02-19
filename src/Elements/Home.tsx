@@ -5,6 +5,7 @@ import Education from './Education';
 import HomeSkills from './Skills';
 import Projects from './Projects';
 import ContactUs from './Contact';
+import AboutMe from './AboutMe';
 
 const Home = () => {
     const [data, setData] = React.useState(false);
@@ -72,6 +73,7 @@ const Home = () => {
                 <header>
                     <Navbar method={toggleBackground} data={data} />
                     <div id='main'><Main data={data}/></div>
+                    <div id='about'><AboutMe/></div>
                     <div id='education'><Education /></div>
                     <div id='skills'><HomeSkills/></div>
                     <div id='projects'><Projects/></div>

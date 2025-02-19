@@ -80,6 +80,9 @@ const Navbar = (props: { data: any; method: () => void; }) => {
                    <a href="#main">Home</a> 
                   </button>
                   <button className="text-sky-600 hover:text-gray-500 hover:bg-gray-100 px-3 py-1 rounded-full transition-colors font-serif">
+                  <a href="#about">About Me</a> 
+                  </button>
+                  <button className="text-sky-600 hover:text-gray-500 hover:bg-gray-100 px-3 py-1 rounded-full transition-colors font-serif">
                   <a href="#education">My Journey</a> 
                   </button>
                   <button className="text-sky-600 hover:text-gray-500 hover:bg-gray-100 px-3 py-1 rounded-full transition-colors font-serif">

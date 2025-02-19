@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 
 const SECTION_SEQUENCE = [
   { id: 'main', name: 'Home' },
+  { id: 'about', name: 'About' },
   { id: 'education', name: 'My Journey' },
   { id: 'skills', name: 'Skills' },
   { id: 'projects', name: 'Projects' },
