@@ -1,193 +1,95 @@
-import  { useState, useEffect } from "react";
-import { IoIosSunny } from "react-icons/io";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { Menu, Moon, Sun, X } from "lucide-react";
+import { useDarkMode } from "@/hooks/Theme";
 
-const Navbar = (props: { data: any; method: () => void; }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const [lastScrollPosition, setLastScrollPosition] = useState(0);
-  const [isVisible, setIsVisible] = useState(true);
+const navItems = [
+  { name: "Home", link: "home" },
+  { name: "About", link: "about" },
+  { name: "Qualifications", link: "qualifications" },
+  { name: "Skills", link: "skills" },
+  { name: "Projects", link: "projects" },
+  { name: "Contact", link: "contact" }
+];
+
+const Navbar: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const { theme, toggleTheme } = useDarkMode();
+  const [opacity, setOpacity] = useState(1);
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollPos = window.scrollY;
-      const isScrollingUp = currentScrollPos < lastScrollPosition;
-      
-      setScrollPosition(currentScrollPos);
-      setLastScrollPosition(currentScrollPos);
-      
-      if (currentScrollPos < 50) {
-        setIsVisible(true);
-      } else if (isScrollingUp) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
+      const scrollY = window.scrollY;
+      const newOpacity = Math.max(0.5, 1 - scrollY / 300); // Min opacity is 0.5
+      setOpacity(newOpacity);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollPosition]);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-  const navbarVariants = {
-    initial: {
-      y: -100,
-      opacity: 0,
-    },
-    animate: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.3,
-      },
-    },
-    exit: {
-      y: -100,
-      opacity: 0,
-      transition: {
-        duration: 0.3,
-      },
-    },
+  const handleNavigation = (id: string) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
-    <AnimatePresence>
-      {isVisible && (
-        <motion.div
-          variants={navbarVariants}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-          className="fixed top-0 left-0 right-0 z-50 flex justify-center "
-        >
-          <nav
-            className={`transition-all duration-300 ${
-              scrollPosition > 50 
-                ? 'w-2/3 mt-4 rounded-full bg-white-90 backdrop-blur-sm shadow-lg border border-blue-300' 
-                : 'w-full bg-white border-b border-blue-300'
-            }`}
-          >
-            <div className={`mx-auto py-4  ${scrollPosition > 50 ? 'max-w-full bg-white border border-blue-300 rounded-full py-1 px-6' : 'container  border border-blue-300 py-6'} ${props.data ? 'bg-black text-white' : 'bg-gray-50 text-black'}   ${scrollPosition ==0 ? 'border-none w-full ':''}`}>
-              <div className="flex justify-between items-center">
-                {/* Logo Section */}
-                <div className="text-sky-600 text-3xl font-bold font-serif mr-16">
-                  <span className="text-red-600 font-cursive">A</span>sish
-                </div>
+    <nav
+      style={{ opacity }}
+      className="fixed w-full top-0 shadow-md transition-all bg-white dark:bg-black dark:text-white z-50"
+    >
+      <div className="max-w-screen-xl mx-auto flex items-center justify-between px-6 py-4">
+        {/* Brand */}
+        <div className="text-2xl font-bold text-blue-600 pl-10">Asish</div>
 
-                {/* Desktop Menu */}
-                <div className="hidden lg:flex text-lg items-center space-x-8">
-                  <button className="text-sky-600 hover:text-gray-500 hover:bg-gray-100 px-3 py-1 rounded-full transition-colors font-serif">
-                   <a href="#main">Home</a> 
-                  </button>
-                  <button className="text-sky-600 hover:text-gray-500 hover:bg-gray-100 px-3 py-1 rounded-full transition-colors font-serif">
-                  <a href="#about">About Me</a> 
-                  </button>
-                  <button className="text-sky-600 hover:text-gray-500 hover:bg-gray-100 px-3 py-1 rounded-full transition-colors font-serif">
-                  <a href="#education">My Journey</a> 
-                  </button>
-                  <button className="text-sky-600 hover:text-gray-500 hover:bg-gray-100 px-3 py-1 rounded-full transition-colors font-serif">
-                  <a href="#skills">Skills</a> 
-                  </button>
-                  <button className="text-sky-600 hover:text-gray-500 hover:bg-gray-100 px-3 py-1 rounded-full transition-colors font-serif">
-                  <a href="#projects">Projects</a> 
-                  </button>
-                  <button className="text-sky-600 hover:text-gray-500 hover:bg-gray-100 px-3 py-1 rounded-full transition-colors font-serif">
-                  <a href="#contact">Contact</a> 
-                  </button>
-                  <button 
-                    onClick={() => props.method()}
-                    className="text-sky-600 hover:text-gray-500 transition-colors"
-                  >
-                    <IoIosSunny size={30} />
-                  </button>
-                </div>
+        {/* Desktop Nav */}
+        <ul className="hidden md:flex space-x-8 text-gray-600 font-medium">
+          {navItems.map((item) => (
+            <li
+              key={item.name}
+              className="cursor-pointer hover:text-blue-500 transition duration-300 dark:text-white dark:shadow-lg"
+              onClick={() => handleNavigation(item.link)}
+            >
+              {item.name}
+            </li>
+          ))}
+          <button onClick={toggleTheme} className="h-6 rounded-full transition">
+            {theme === "dark" ? <Sun className="text-yellow-400" /> : <Moon className="text-gray-800" />}
+          </button>
+        </ul>
 
-                {/* Mobile Menu Button */}
-                <div className="lg:hidden">
-                  <button
-                    onClick={() => setIsMenuOpen(!isMenuOpen)}
-                    className="text-sky-600 focus:outline-none"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={2}
-                      stroke="currentColor"
-                      className="w-8 h-8"
-                    >
-                      {isMenuOpen ? (
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M6 18L18 6M6 6l12 12"
-                        />
-                      ) : (
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M4 6h16M4 12h16m-7 6h7"
-                        />
-                      )}
-                    </svg>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </nav>
+        {/* Mobile Menu Icon */}
+        <div className="md:hidden">
+          <button onClick={() => setIsOpen(!isOpen)}>
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+      </div>
 
-          {/* Mobile Dropdown Menu */}
-          <AnimatePresence>
-            {isMenuOpen && (
-              <motion.div
-                initial={{ opacity: 0, x: 300 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 300 }}
-                transition={{ duration: 0.3 }}
-                className="fixed top-0 right-0 h-full w-2/3 bg-white shadow-lg z-50"
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className="md:hidden bg-white dark:bg-black shadow-sm px-6 pb-4">
+          <ul className="flex flex-col space-y-4 text-gray-600 font-medium">
+            {navItems.map((item) => (
+              <li
+                key={item.name}
+                className="cursor-pointer hover:text-blue-500 transition duration-300"
+                onClick={() => {
+                  handleNavigation(item.link);
+                  setIsOpen(false);
+                }}
               >
-                <button
-                  className="absolute top-4 right-4 text-sky-700"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={2}
-                    stroke="currentColor"
-                    className="w-6 h-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
-                </button>
-                <div className="flex flex-col text-lg items-start p-4 space-y-4 mt-12">
-                  <button className="text-sky-700 hover:text-gray-500 hover:bg-gray-100 px-3 py-1 rounded-full w-full text-left transition-colors font-serif">
-                    Education
-                  </button>
-                  <button className="text-sky-700 hover:text-gray-500 hover:bg-gray-100 px-3 py-1 rounded-full w-full text-left transition-colors font-serif">
-                    Profiles
-                  </button>
-                  <button className="text-sky-700 hover:text-gray-500 hover:bg-gray-100 px-3 py-1 rounded-full w-full text-left transition-colors font-serif">
-                    Work Experience
-                  </button>
-                  <button className="text-sky-700 hover:text-gray-500 hover:bg-gray-100 px-3 py-1 rounded-full w-full text-left transition-colors font-serif">
-                    Projects
-                  </button>
-                  <button className="text-sky-700 hover:text-gray-500 hover:bg-gray-100 px-3 py-1 rounded-full w-full text-left transition-colors font-serif">
-                    Skills
-                  </button>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </motion.div>
+                {item.name}
+              </li>
+            ))}
+            <button onClick={toggleTheme} className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+              {theme === "dark" ? <Sun className="text-yellow-400" /> : <Moon className="text-gray-800" />}
+            </button>
+          </ul>
+        </div>
       )}
-    </AnimatePresence>
+    </nav>
   );
 };
 

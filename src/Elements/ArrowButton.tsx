@@ -3,12 +3,12 @@ import { ChevronDown, ChevronUp } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 const SECTION_SEQUENCE = [
-  { id: 'main', name: 'Home' },
-  { id: 'about', name: 'About' },
-  { id: 'education', name: 'My Journey' },
-  { id: 'skills', name: 'Skills' },
-  { id: 'projects', name: 'Projects' },
-  { id: 'contact', name: 'Contact' }
+  { id: 'main', name: '' },
+  { id: 'about', name: '' },
+  { id: 'education', name: '' },
+  { id: 'skills', name: '' },
+  { id: 'projects', name: '' },
+  { id: 'contact', name: '' }
 ];
 
 const ScrollArrow = ({ darkMode = false }) => {
@@ -56,7 +56,7 @@ const ScrollArrow = ({ darkMode = false }) => {
 
   return (
     <motion.div
-      className="fixed bottom-8 right-8 cursor-pointer z-50 flex flex-col items-center"
+      className="fixed bottom-4 right-8 cursor-pointer z-50 flex flex-col items-center"
       animate={{
         y: [0, -10, 0],
       }}
@@ -69,28 +69,28 @@ const ScrollArrow = ({ darkMode = false }) => {
       onClick={handleClick}
     >
       {/* Section label */}
-      <div className={`mb-2 text-sm font-medium ${
+      <div className={`mb-1 text-sm font-medium ${
         darkMode ? 'text-white' : 'text-gray-800'
       }`}>
-        {isLastSection ? 'Back to Top' : SECTION_SEQUENCE[(getCurrentSectionIndex() + 1) % SECTION_SEQUENCE.length].name}
+        {isLastSection ? '' : SECTION_SEQUENCE[(getCurrentSectionIndex() + 1) % SECTION_SEQUENCE.length].name}
       </div>
       
       {/* Arrow button */}
-      <div className={`p-3 rounded-full ${
+      <div className={`p-1 rounded-full ${
         darkMode ? 'bg-gray-800' : 'bg-white'
       } shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-blue-500`}>
         {isLastSection ? (
           <ChevronUp 
             size={24} 
             className={`${
-              darkMode ? 'text-white' : 'text-gray-800'
+              darkMode ? 'text-white' : 'text-gray-500'
             } transition-colors duration-300 hover:text-blue-500`}
           />
         ) : (
           <ChevronDown 
             size={24} 
             className={`${
-              darkMode ? 'text-white' : 'text-gray-800'
+              darkMode ? 'text-white' : 'text-gray-500'
             } transition-colors duration-300 hover:text-blue-500`}
           />
         )}

@@ -47,9 +47,9 @@ const Education = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 py-16">
+    <div className="min-h-screen bg-gray-50 py-1 dark:bg-black">
       <div className="max-w-6xl mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-20 text-gray-800">My Journey</h2>
+        <h2 className="text-4xl font-bold text-center mb-10 text-gray-800 dark:text-white">My Journey</h2>
         
         <div className="relative" ref={ref}>
           {/* The main curved road */}
@@ -75,40 +75,40 @@ const Education = () => {
           </div>
 
           {/* Timeline Items */}
-          <div className="relative space-y-20">
+          <div className="relative space-y-6">
             {timelineData.map((item, index) => (
               <motion.div
                 key={item.id}
                 initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100 }}
                 animate={inView ? { opacity: 1, x: 0 } : { opacity: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.2 }}
-                className="flex items-center justify-center"
+                className="flex items-center justify-center  dark:shadow-lg"
               >
                 {/* Card Container */}
                 <div 
-                  className={`w-6/12 ${index % 2 === 0 ? 'mr-auto pr-12' : 'ml-auto pl-12'}`}
+                  className={`w-4/12 ${index % 2 === 0 ? 'mr-96 pr-12' : 'ml-96 pl-12'}`}
                 >
                   <motion.div 
-                    className={`p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 
+                    className={`p-4 rounded-xl shadow-lg hover:shadow-xl dark:bg-gray-900 transition-all duration-300 
                       ${item.id%2===0
-                        ? 'bg-indigo-50 hover:bg-indigo-100 border-l-4 border-indigo-500' 
-                        : 'bg-emerald-50 hover:bg-emerald-100 border-l-4 border-emerald-500'
+                        ? ' border-l-4 border-indigo-500' 
+                        : ' border-l-4 border-emerald-500'
                       }`}
                     whileHover={{ y: -10 }}
                   >
                     <span className={`inline-block px-2 py-1 rounded-full text-sm font-medium mb-2
                       ${item.id%2===0
-                        ? 'bg-indigo-100 text-indigo-800' 
+                        ? 'bg-indigo-100 text-indigo-800 ' 
                         : 'bg-emerald-100 text-emerald-800'
                       }`}
                     >
                       {item.type === 'education' ? 'Education' : 'Internship'}
                     </span>
-                    <h3 className="text-xl font-bold text-gray-800 mb-1">{item.title}</h3>
-                    <p className="text-gray-600 font-medium">{item.organization}</p>
-                    <p className="text-gray-500">{item.duration}</p>
-                    {item.details && <p className="text-gray-500">{item.details}</p>}
-                    {item.score && <p className="text-gray-500 font-medium mt-1">{item.score}</p>}
+                    <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-1">{item.title}</h3>
+                    <p className="text- dark:text-gray-300 font-medium">{item.organization}</p>
+                    <p className="text-gray-500 dark:text-gray-300">{item.duration}</p>
+                    {item.details && <p className="text-gray-500 dark:text-gray-300">{item.details}</p>}
+                    {item.score && <p className="text-gray-500 dark:text-gray-300 font-medium mt-1">{item.score}</p>}
                   </motion.div>
                 </div>
 

@@ -1,65 +1,84 @@
-import { useState } from 'react';
-import { useInView } from 'react-intersection-observer';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { FaStar, FaGithub, FaExternalLinkAlt } from "react-icons/fa";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useEffect } from 'react'
+import { motion } from 'framer-motion'
+import { Card } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
+import { ChevronLeft, ChevronRight, Volume2, Pause } from 'lucide-react'
+import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa'
+import pr1 from '../Images/agristock.jpeg'
+import pr2 from '../Images/port2.jpg'
+import pr3 from '../Images/resbuild.webp'
 
-// Define the Project interface
+const ProjectSpeech = ({ text }: { text: string }) => {
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [voice, setVoice] = useState<SpeechSynthesisVoice | null>(null)
+
+  useEffect(() => {
+    const loadVoices = () => {
+      const voices = window.speechSynthesis.getVoices()
+      const preferred = voices.find(v => v.name.includes('Microsoft Connor') && v.lang === 'en-IE')
+      setVoice(preferred || voices[0] || null)
+    }
+
+    loadVoices()
+    window.speechSynthesis.onvoiceschanged = loadVoices
+  }, [])
+
+  const speak = () => {
+    if (!text || !voice) return
+    const utterance = new SpeechSynthesisUtterance(text)
+    utterance.voice = voice
+    utterance.pitch = 1
+    utterance.rate = 1
+    utterance.onend = () => setIsPlaying(false)
+    setIsPlaying(true)
+    window.speechSynthesis.speak(utterance)
+  }
+
+  const stop = () => {
+    window.speechSynthesis.cancel()
+    setIsPlaying(false)
+  }
+
+  return isPlaying ? (
+    <Button variant="outline" size="sm" onClick={stop} className="rounded-full">
+      <Pause size={16} />
+    </Button>
+  ) : (
+    <Button variant="outline" size="sm" onClick={speak} className="rounded-full">
+      <Volume2 size={16} />
+    </Button>
+  )
+}
+
 interface Project {
-  id: number;
-  title: string;
-  technologies: string[];
-  image: string;
-  category: string;
-  problem: string;
-  solution: string;
-  demoLink: string;
-  githubLink: string;
+  id: number
+  title: string
+  technologies: string[]
+  image: string
+  category: string
+  problem: string
+  solution: string
+  overview: string
+  demoLink: string
+  githubLink: string
 }
 
-// Define the ProjectProps interface for the modal
-interface ProjectProps {
-  project: Project | null;
-  isOpen: boolean;
-  onClose: () => void;
-}
-
-const Projects: React.FC = () => {
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [currentPage, setCurrentPage] = useState(0);
-  const projectsPerPage = 4;
-
-  const { ref, inView } = useInView({
-    triggerOnce: false,
-    threshold: 0.1
-  });
-
-  const projectColors = [
-    'bg-emerald-50 hover:bg-emerald-100',
-    'bg-sky-50 hover:bg-sky-100',
-    'bg-purple-50 hover:bg-purple-100',
-    'bg-amber-50 hover:bg-amber-100'
-  ];
-
-  const buttonColors = [
-    'bg-emerald-400 hover:bg-emerald-500',
-    'bg-sky-400 hover:bg-sky-500',
-    'bg-purple-400 hover:bg-purple-500',
-    'bg-amber-400 hover:bg-amber-500'
-  ];
+const Projects = () => {
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
+  const [activeIndex, setActiveIndex] = useState(2)
 
   const projects: Project[] = [
     {
       id: 1,
       title: 'Agri Stock Pro',
       technologies: ['EJS', 'Node.js', 'Express.js', 'PostgreSQL'],
-      image: '/api/placeholder/600/400',
+      image: pr1,
       category: 'done',
       problem: 'Farmers needed a better way to manage their agricultural inventory and track stock levels efficiently.',
       solution: 'Developed a comprehensive stock management system with real-time tracking, automated alerts, and detailed reporting.',
+      overview: 'Agri Stock Pro is a comprehensive inventory management system for agricultural businesses.',
       demoLink: 'https://link-to-agri-stock',
       githubLink: 'https://github.com/your-username/agri-stock'
     },
@@ -67,226 +86,199 @@ const Projects: React.FC = () => {
       id: 2,
       title: 'Agri Stock Pro 2',
       technologies: ['React', 'Node.js', 'Express.js', 'MongoDB'],
-      image: '/api/placeholder/600/400',
+      image: pr2,
       category: 'in-progress',
       problem: 'Farmers needed an updated version with mobile support.',
       solution: 'Implemented a responsive design and mobile app integration for real-time stock updates.',
+      overview: 'Agri Stock Pro 2 builds upon the original system with mobile-first design principles.',
       demoLink: 'https://link-to-agri-stock-2',
       githubLink: 'https://github.com/your-username/agri-stock-2'
     },
     {
       id: 3,
-      title: 'Agri Stock Pro',
-      technologies: ['EJS', 'Node.js', 'Express.js', 'PostgreSQL'],
-      image: '/api/placeholder/600/400',
+      title: 'Agri Stock Pro 3',
+      technologies: ['React', 'Node.js', 'Express.js', 'PostgreSQL'],
+      image: pr3,
       category: 'done',
-      problem: 'Farmers needed a better way to manage their agricultural inventory and track stock levels efficiently.',
-      solution: 'Developed a comprehensive stock management system with real-time tracking, automated alerts, and detailed reporting.',
-      demoLink: 'https://link-to-agri-stock',
-      githubLink: 'https://github.com/your-username/agri-stock'
+      problem: 'Agricultural businesses needed advanced analytics capabilities.',
+      solution: 'Integrated data visualization and predictive analytics to provide insights on inventory management.',
+      overview: 'Agri Stock Pro 3 focuses on data analytics and visualization.',
+      demoLink: 'https://link-to-agri-stock-3',
+      githubLink: 'https://github.com/your-username/agri-stock-3'
     },
     {
       id: 4,
-      title: 'Agri Stock Pro 2',
-      technologies: ['React', 'Node.js', 'Express.js', 'MongoDB'],
-      image: '/api/placeholder/600/400',
+      title: 'Agri Stock Pro 4',
+      technologies: ['Next.js', 'TypeScript', 'Prisma', 'PostgreSQL'],
+      image: pr1, // Using pr1 again, you may want to import more images
       category: 'in-progress',
-      problem: 'Farmers needed an updated version with mobile support.',
-      solution: 'Implemented a responsive design and mobile app integration for real-time stock updates.',
-      demoLink: 'https://link-to-agri-stock-2',
-      githubLink: 'https://github.com/your-username/agri-stock-2'
+      problem: 'Existing platform needed significant performance improvements.',
+      solution: 'Complete rewrite using modern stack with improved data models and optimized queries.',
+      overview: 'Agri Stock Pro 4 represents a complete technical overhaul of the platform.',
+      demoLink: 'https://link-to-agri-stock-4',
+      githubLink: 'https://github.com/your-username/agri-stock-4'
     },
     {
       id: 5,
-      title: 'Agri Stock Pro',
-      technologies: ['EJS', 'Node.js', 'Express.js', 'PostgreSQL'],
-      image: '/api/placeholder/600/400',
+      title: 'Agri Stock Pro 5',
+      technologies: ['React Native', 'Firebase', 'Redux'],
+      image: pr2, // Using pr2 again, you may want to import more images
       category: 'done',
-      problem: 'Farmers needed a better way to manage their agricultural inventory and track stock levels efficiently.',
-      solution: 'Developed a comprehensive stock management system with real-time tracking, automated alerts, and detailed reporting.',
-      demoLink: 'https://link-to-agri-stock',
-      githubLink: 'https://github.com/your-username/agri-stock'
-    },
-    {
-      id: 6,
-      title: 'Agri Stock Pro 2',
-      technologies: ['React', 'Node.js', 'Express.js', 'MongoDB'],
-      image: '/api/placeholder/600/400',
-      category: 'in-progress',
-      problem: 'Farmers needed an updated version with mobile support.',
-      solution: 'Implemented a responsive design and mobile app integration for real-time stock updates.',
-      demoLink: 'https://link-to-agri-stock-2',
-      githubLink: 'https://github.com/your-username/agri-stock-2'
-    },
-    // More projects can be added here...
-  ];
+      problem: 'Field workers needed offline mobile access to inventory data.',
+      solution: 'Created a cross-platform mobile app with offline capabilities and sync when connectivity restored.',
+      overview: 'Agri Stock Pro 5 is a dedicated mobile application designed for field workers.',
+      demoLink: 'https://link-to-agri-stock-5',
+      githubLink: 'https://github.com/your-username/agri-stock-5'
+    }
+  ]
 
-  const totalPages = Math.ceil(projects.length / projectsPerPage);
+  const visibleCards = () => {
+    const result = []
 
-  const displayedProjects = projects.slice(
-    currentPage * projectsPerPage,
-    (currentPage + 1) * projectsPerPage
-  );
+    for (let i = activeIndex - 1; i <= activeIndex + 1; i++) {
+      const index = (i + projects.length) % projects.length
+      result.push({ project: projects[index], position: i - activeIndex })
+    }
 
-  const ProjectModal: React.FC<ProjectProps> = ({ project, isOpen, onClose }) => {
-    if (!project) return null;
-
-    return (
-      <Dialog open={isOpen} onOpenChange={onClose}>
-        <DialogContent className="max-w-2xl bg-white rounded-xl shadow-lg">
-          <DialogHeader>
-            <DialogTitle className="text-2xl font-bold">{project.title}</DialogTitle>
-          </DialogHeader>
-          <div className="mt-4">
-            <img 
-              src={project.image} 
-              alt={project.title}
-              className="w-full h-64 object-cover rounded-lg mb-4"
-            />
-            <div className="space-y-4">
-              <div>
-                <h3 className="text-lg font-semibold text-primary">Problem</h3>
-                <p className="mt-1">{project.problem}</p>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-primary">Solution</h3>
-                <p className="mt-1">{project.solution}</p>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-primary">Technologies</h3>
-                <div className="flex flex-wrap gap-2 mt-2">
-                  {project.technologies.map((tech) => (
-                    <Badge key={tech} variant="secondary">{tech}</Badge>
-                  ))}
-                </div>
-              </div>
-              <div className="flex gap-4 mt-6">
-                <Button 
-                  variant="outline"
-                  onClick={() => window.open(project.demoLink, '_blank')}
-                  className="flex items-center gap-2"
-                >
-                  <FaExternalLinkAlt /> Live Demo
-                </Button>
-                <Button 
-                  variant="outline"
-                  onClick={() => window.open(project.githubLink, '_blank')}
-                  className="flex items-center gap-2"
-                >
-                  <FaGithub /> View Code
-                </Button>
-              </div>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
-    );
-  };
+    return result
+  }
 
   return (
-    <>
-      <section className="py-16 bg-gradient-to-b from-white to-gray-50 min-h-screen">
-        <div className="container mx-auto px-4 min-h-screen">
-          <div className="mb-12 text-center">
-            <h2 className="text-4xl font-bold mb-4">Projects</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              A collection of my recent work showcasing problem-solving skills and technical expertise.
-            </p>
-          </div>
+    <motion.section className="py-8 min-h-screen dark:bg-gray-900" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+      <div className="container mx-auto px-4">
+        <motion.div className="mb-12 text-center" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}>
+          <h2 className="text-4xl font-bold mb-2 dark:text-white">Projects</h2>
+          <p className="max-w-2xl mx-auto dark:text-white">A collection of my recent work showcasing problem-solving skills and technical expertise.</p>
+        </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            {displayedProjects.map((project, index) => (
-              <div
-                key={project.id}
-                ref={ref}
-                className="transform transition-all duration-300 hover:scale-105"
-                style={{
-                  opacity: inView ? 1 : 0,
-                  transform: `translateY(${inView ? 0 : '20px'})`,
-                  transition: `all 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s`
-                }}
-              >
-                <Card className={`h-full overflow-hidden shadow-lg hover:shadow-xl ${projectColors[index % projectColors.length]}`}>
-                  <div className="relative">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-48 object-cover"
-                    />
-                    {project.category === 'featured' && (
-                      <div className="absolute top-2 right-2">
-                        <Badge variant="secondary" className="flex items-center gap-1">
-                          <FaStar className="text-yellow-500" />
-                          Featured
-                        </Badge>
-                      </div>
-                    )}
-                  </div>
-                  <CardContent className="p-4">
-                    <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.technologies.map((tech) => (
-                        <Badge key={tech} variant="outline" className="text-xs">
-                          {tech}
-                        </Badge>
-                      ))}
-                    </div>
-                  </CardContent>
-                  <CardFooter className="p-4 pt-0">
-                    <Button 
-                      variant="default"
-                      className={`w-full shadow-lg text-white ${buttonColors[index % buttonColors.length]}`}
-                      onClick={() => setSelectedProject(project)}
-                    >
-                      View Details
-                    </Button>
-                  </CardFooter>
-                </Card>
-              </div>
-            ))}
-          </div>
+        <div className="relative h-96 max-w-6xl mx-auto">
+          <button className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full p-2 shadow-lg" onClick={() => setActiveIndex(i => (i > 0 ? i - 1 : projects.length - 1))}>
+            <ChevronLeft className="h-6 w-6" />
+          </button>
+          <button className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full p-3 shadow-lg" onClick={() => setActiveIndex(i => (i + 1) % projects.length)}>
+            <ChevronRight className="h-6 w-6" />
+          </button>
 
-          <div className="flex justify-center items-center mt-8 gap-4">
-            <Button
-              variant="outline"
-              onClick={() => setCurrentPage(prev => Math.max(0, prev - 1))}
-              disabled={currentPage === 0}
-              className="flex items-center gap-2"
-            >
-              <ChevronLeft className="h-4 w-4" /> Prev
-            </Button>
-
-            <div className="flex gap-2">
-              {[...Array(totalPages)].map((_, index) => (
-                <Button
-                  key={index}
-                  variant={currentPage === index ? 'default' : 'outline'}
-                  onClick={() => setCurrentPage(index)}
+          <div className="relative w-full h-full flex items-center justify-center">
+            {visibleCards().map(({ project, position }, i) => {
+              const isActive = position === 0
+              return (
+                <motion.div
+                  key={project.id}
+                  className={`absolute ${isActive ? 'max-w-2xl' : 'max-w-xs'} w-full cursor-pointer`}
+                  style={{ zIndex: isActive ? 30 : 10, height: isActive ? '25rem' : '20rem' }}
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: isActive ? 1 : 0.2, x: `${position * 100}%`, y: 0 }}
+                  transition={{ duration: 1.0, delay: i * 0.2, type: 'spring', stiffness: 60 }}
+                  onClick={() => (isActive ? setSelectedProject(project) : setActiveIndex(projects.findIndex(p => p.id === project.id)))}
                 >
-                  {index + 1}
-                </Button>
-              ))}
-            </div>
+                  <motion.div
+                    className="w-full h-full"
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.88 }}
+                    transition={{ type: '', stiffness: 300 }}
+                  >
+                    <Card className="flex h-full shadow-lg rounded-xl overflow-hidden bg-white  dark:bg-gray-900 dark:text-gray-100 ">
+                      <motion.div
+                        className="w-1/2 h-full"
+                        initial={{ x: -20, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        transition={{ delay: i * 0.1 + 0.2 }}
+                      >
+                        <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
+                      </motion.div>
 
-            <Button
-              variant="outline"
-              onClick={() => setCurrentPage(prev => Math.min(totalPages - 1, prev + 1))}
-              disabled={currentPage === totalPages - 1}
-              className="flex items-center gap-2"
-            >
-              Next <ChevronRight className="h-4 w-4" />
-            </Button>
+                      <motion.div
+                        className="w-1/2 h-full p-4 flex flex-col justify-between border"
+                        initial={{ x: 20, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        transition={{ delay: i * 0.1 + 0.3 }}
+                      >
+                        <div className='my-auto'>
+                          <h3 className="text-2xl font-semibold dark:text-gray-100  ">{project.title}</h3>
+                          {isActive && <p className="text-12 text-gray-800 mt-1 dark:text-gray-100 ">{project.solution}</p>}
+                         
+                            <motion.div
+                              className="flex flex-wrap gap-1 mt-2 text-gray-500"
+                              initial={{ opacity: 0, y: 5 }}
+                              animate={{ opacity: 0.5, y: 0 }}
+                              transition={{ delay: i * 0.1 + 0.4 }}
+                            >
+                              {project.technologies.slice(0, 2).map(t => (
+                                <Badge key={t} variant="secondary" className="text-xs text-black bg-gray-200 rounded-2xl dark:text-gray-800 ">{t}</Badge>
+                              ))}
+                              {project.technologies.length > 2 && (
+                                <Badge variant="secondary" className="text-xs text-black">+{project.technologies.length - 2}</Badge>
+                              )}
+                               
+                         
+                        
+                            </motion.div>
+                             <motion.div
+                            className="flex justify-center mt-6 "
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: i * 0.1 + 0.5 }}
+                          >
+                            <Button
+                              variant="default"
+                              size="sm"
+                              className="text-xs px-3 py-1 bg-purple-600 hover:bg-purple-700 text-white"
+                              onClick={() => setSelectedProject(project)}
+                            >
+                              View Details
+                            </Button>
+                          </motion.div>
+                            
+                          
+                        </div>
+
+                       
+                      </motion.div>
+                    </Card>
+                  </motion.div>
+                </motion.div>
+              )
+            })}
           </div>
         </div>
-      </section>
 
-      <ProjectModal
-        project={selectedProject}
-        isOpen={!!selectedProject}
-        onClose={() => setSelectedProject(null)}
-      />
-    </>
-  );
-};
+        <div className="flex justify-center items-center mt-8 gap-4">
+          {projects.map((_, i) => (
+            <button key={i} className={`h-3 rounded-full transition-all ${i === activeIndex ? 'w-6 bg-white' : 'w-3 bg-white'}`} onClick={() => setActiveIndex(i)} />
+          ))}
+        </div>
+      </div>
 
-export default Projects;
+      {selectedProject && (
+        <Dialog open={!!selectedProject} onOpenChange={() => setSelectedProject(null)}>
+          <DialogContent className="max-w-4xl max-h-[95%] bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-auto">
+            <DialogHeader>
+              <div className="flex justify-between items-center">
+                <DialogTitle className="text-2xl font-bold dark:text-gray-100">{selectedProject.title}</DialogTitle>
+                <ProjectSpeech text={selectedProject.overview}  />
+              </div>
+            </DialogHeader>
+            <div className="mt-4">
+              <img src={selectedProject.image} alt={selectedProject.title} className="w-full h-64 object-cover rounded-lg mb-4" />
+              <div className="space-y-4">
+                <div><h3 className="text-lg dark:text-gray-100 font-semibold">Problem</h3><p className="mt-1 dark:text-gray-100">{selectedProject.problem}</p></div>
+                <div><h3 className="text-lg dark:text-gray-100 font-semibold">Solution</h3><p className="mt-1 dark:text-gray-100">{selectedProject.solution}</p></div>
+                <div>
+                  <h3 className="text-lg font-semibold dark:text-gray-100">Technologies</h3>
+                  <div className="flex flex-wrap gap-2 mt-2 dark:text-gray-900">{selectedProject.technologies.map(t => <Badge key={t} variant="secondary" className='bg-gray-100 rounded-xl'>{t}</Badge>)}</div>
+                </div>
+                <div className="flex gap-4 mt-6">
+                  <Button variant="outline" onClick={() => window.open(selectedProject.demoLink, '_blank')} className="flex items-center dark:text-gray-100 gap-2"><FaExternalLinkAlt /> Live Demo</Button>
+                  <Button variant="outline" onClick={() => window.open(selectedProject.githubLink, '_blank')} className="flex items-center dark:text-gray-100 gap-2"><FaGithub /> View Code</Button>
+                </div>
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
+      )}
+    </motion.section>
+  )
+}
+
+export default Projects

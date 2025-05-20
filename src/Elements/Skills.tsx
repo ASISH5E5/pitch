@@ -11,26 +11,43 @@ const skillCategories = [
   {
     title: "Programming",
     description: "Expertise in multiple programming languages with a focus on building robust and efficient applications.",
-    skills: ["Java", "Python", "JavaScript", "SQL"],
-    icons: [<FaJava />, <FaPython />, <IoLogoJavascript />, <BsFileEarmarkCodeFill />]
+    skills: [
+      { name: "Java", icon: <FaJava /> },
+      { name: "Python", icon: <FaPython /> },
+      { name: "JavaScript", icon: <IoLogoJavascript /> },
+      { name: "SQL", icon: <BsFileEarmarkCodeFill /> }
+    ]
   },
   {
     title: "Web Development",
     description: "Creating responsive and dynamic web applications using modern frameworks and libraries.",
-    skills: ["React", "HTML", "CSS", "NodeJS", "ExpressJS"],
-    icons: [<FaReact />, <FaHtml5 />, <FaCss3 />, <DiNodejs />, <SiExpress />]
+    skills: [
+      { name: "React", icon: <FaReact /> },
+      { name: "HTML", icon: <FaHtml5 /> },
+      { name: "CSS", icon: <FaCss3 /> },
+      { name: "NodeJS", icon: <DiNodejs /> },
+      { name: "ExpressJS", icon: <SiExpress /> }
+    ]
   },
   {
     title: "Databases",
     description: "Experience with both SQL and NoSQL databases for efficient data storage and retrieval.",
-    skills: ["MySQL", "MongoDB", "Firebase", "PostgreSQL"],
-    icons: [<SiMysql />, <DiMongodb />, <SiFirebase />, <BiLogoPostgresql />]
+    skills: [
+      { name: "MySQL", icon: <SiMysql /> },
+      { name: "MongoDB", icon: <DiMongodb /> },
+      { name: "Firebase", icon: <SiFirebase /> },
+      { name: "PostgreSQL", icon: <BiLogoPostgresql /> }
+    ]
   },
   {
     title: "Other Tools",
     description: "Proficiency with various development tools and version control systems.",
-    skills: ["Git", "GitHub", "VS Code", "Docker"],
-    icons: [<FaGitAlt />, <FaGithub />, <BsFileEarmarkCodeFill />, <BsFileEarmarkCodeFill />]
+    skills: [
+      { name: "Git", icon: <FaGitAlt /> },
+      { name: "GitHub", icon: <FaGithub /> },
+      { name: "VS Code", icon: <BsFileEarmarkCodeFill /> },
+      { name: "Docker", icon: <BsFileEarmarkCodeFill /> }
+    ]
   }
 ];
 
@@ -39,13 +56,13 @@ const HomeSkills = () => {
   const isInView = useInView(ref, { once: false, amount: 0.1 });
 
   return (
-    <section className="py-16 bg-indigo-50 overflow-hidden min-h-screen">
-      <div className="container mx-auto px-4 md:px-8 relative my-auto ">
+    <section className="py-8 bg-indigo-50 dark:bg-gray-800 overflow-hidden min-h-screen">
+      <div className="container mx-auto px-4 md:px-8 relative my-auto">
         {/* Left side content */}
-        <div className="flex flex-col md:flex-row py-16" >
-          <div className="md:w-1/3 mb-12 md:mb-0 pr-0 md:pr-8 py-20">
+        <div className="flex flex-col md:flex-row py-16">
+          <div className="md:w-1/3 mb-12 md:mb-0 pr-0 md:pr-8 py-10">
             <motion.p 
-              className="text-indigo-500 font-medium tracking-wider mb-3"
+              className="text-indigo-500 font-medium tracking-wider mb-3 "
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
@@ -53,7 +70,7 @@ const HomeSkills = () => {
               MY SKILLS
             </motion.p>
             <motion.h2 
-              className="text-4xl md:text-5xl font-bold text-indigo-900 mb-6 leading-tight"
+              className="text-4xl md:text-5xl font-bold text-indigo-900  dark:text-indigo-600 mb-6 leading-tight"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
@@ -61,7 +78,7 @@ const HomeSkills = () => {
               Things I can do for my clients
             </motion.h2>
             <motion.p 
-              className="text-gray-600 mb-8"
+              className="text-gray-600 mb-8 dark:text-gray-100"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
@@ -100,7 +117,7 @@ const HomeSkills = () => {
                 }}
               >
                 <motion.div 
-                  className="bg-white p-6 rounded-xl shadow-md transform transition-all duration-300 cursor-pointer h-full flex flex-col justify-between"
+                  className="bg-white p-4 rounded-xl shadow-md transform dark:bg-gray-700 transition-all duration-300 cursor-pointer h-full flex flex-col justify-between"
                   whileHover={{ 
                     rotateX: index % 2 === 0 ? -5 : 5,
                     rotateY: index < 2 ? 5 : -5,
@@ -109,40 +126,26 @@ const HomeSkills = () => {
                   }}
                 >
                   <div>
-                    <h3 className="text-xl font-semibold text-indigo-900 mb-3">{category.title}</h3>
-                    <p className="text-gray-600 text-sm mb-4">{category.description}</p>
+                    <h3 className="text-xl font-semibold text-indigo-900 mb-3 dark:text-indigo-600">{category.title}</h3>
+                    <p className="text-gray-600 text-sm mb-4  dark:text-gray-200">{category.description}</p>
                   </div>
                   <div className="flex flex-wrap gap-2 mb-4">
                     {category.skills.map((skill, i) => (
-                      <span key={i} className="text-xs bg-indigo-100 text-indigo-700 px-2 py-1 rounded">
-                        {skill}
+                      <span key={i} className="flex  items-center gap-1 text-sm bg-indigo-100 text-indigo-700 px-2 py-1 rounded">
+                        <span className="text-indigo-600 text-lg">{skill.icon}</span>
+                        {skill.name}
                       </span>
                     ))}
                   </div>
-                  <div className="flex items-center space-x-2 text-indigo-600">
-                    {category.icons.slice(0, 3).map((icon, i) => (
-                      <span key={i} className="text-lg">{icon}</span>
-                    ))}
-                    {category.skills.length > 3 && 
-                      <span className="text-xs bg-indigo-100 text-indigo-700 px-2 py-1 rounded">
-                        +{category.skills.length - 3}
-                      </span>
-                    }
-                  </div>
-                 
                 </motion.div>
               </motion.div>
             ))}
           </div>
         </div>
 
-        {/* Background decoration elements */}
-        <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-indigo-200 rounded-full opacity-30 z-0"></div>
-        <div className="absolute top-12 right-0 w-24 h-24 bg-indigo-200 rounded-full opacity-30 z-0"></div>
-        <div className="absolute -top-12 left-1/4 w-32 h-32 bg-yellow-200 rounded-full opacity-20 z-0"></div>
-      </div>
+       
+          </div>
 
-      {/* Add custom CSS for the perspective effect */}
       <style>{`
         .perspective-1000 {
           perspective: 1000px;

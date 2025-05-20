@@ -13,20 +13,17 @@ const ContactUs = () => {
 
 
   return (
-    <div className="w-full min-h-screen bg-gray-50 py-12">
-      <div className="max-w-6xl mx-auto px-4">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold mb-4">Any Queries?</h1>
+    <div className="w-full max-h-screen bg-gray-50 py-2 pb-4 dark:bg-black">
+      <div className=" mx-auto px-4">
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold mb-1 dark:text-white">Any Queries?</h1>
           <div className="flex items-center justify-center gap-2 text-gray-600">
-            <span>Gummalur</span>
-            <span>|</span>
-           
-            <span>:</span>
-            <span>Andhra Pradesh, India.</span>
+            
+            <span>Let's Connect.</span>
           </div>
         </div>
 
-        <div className="flex flex-wrap gap-12 items-start justify-center">
+        <div className="flex flex-wrap gap-6 items-start justify-center">
           {/* Left side - Illustration */}
           <div className="w-full md:w-5/12">
             <svg className="w-full h-auto" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -39,15 +36,15 @@ const ContactUs = () => {
           </div>
 
           {/* Right side - Contact Form */}
-          <div className="w-full md:w-5/12">
-            <Card className="bg-white shadow-xl">
+          <div className="w-5/6  md:w-4/12 ">
+            <Card className="bg-white shadow-xl h-92 dark:bg-black">
               <CardContent className="p-6">
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-2">
                   <div>
                     <input
                       type="text"
                       placeholder="First Name"
-                      className="w-full p-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full p-3 dark:bg-black rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       required
                     />
                   </div>
@@ -55,7 +52,7 @@ const ContactUs = () => {
                     <input
                       type="text"
                       placeholder="Last Name"
-                      className="w-full p-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full p-3 dark:bg-black rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       required
                     />
                   </div>
@@ -63,7 +60,7 @@ const ContactUs = () => {
                     <input
                       type="email"
                       placeholder="What's your email?"
-                      className="w-full p-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full p-3 dark:bg-black rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       required
                     />
                   </div>
@@ -71,7 +68,7 @@ const ContactUs = () => {
                     <textarea
                       placeholder="Your questions..."
                       rows={4}
-                      className="w-full p-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                      className="w-full p-3 rounded-lg dark:bg-black border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
                       required
                     ></textarea>
                   </div>
