@@ -8,7 +8,12 @@ import ContactUs from './Contact';
 import AboutMe from './AboutMe';
 import Footer from './Footer';
 
-const Home = () => {
+interface NavbarProps {
+  method: () => void;
+  data: boolean;
+}
+
+const Home: React.FC<NavbarProps> = () => {
     const [data, setData] = React.useState(false);
     const [scrollProgress] = useState(0);
 

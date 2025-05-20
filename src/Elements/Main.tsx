@@ -106,7 +106,7 @@ const Main: React.FC<MainProp> = ({ data }) => {
                     className="w-full h-84 mx-auto object-cover object-center"
                   />
                   <div className="absolute inset-0 bg-gradient-to-br from-transparent to-blue-500/20" />
-                  <style jsx>{`
+                  <style>{`
                     @keyframes blobMove {
                       0% { border-radius: 60% 60% 80% 60% / 60% 80% 80% 80%; }
                       20% { border-radius: 63% 57% 54% 66% / 58% 63% 77% 83%; }
