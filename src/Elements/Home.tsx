@@ -8,55 +8,51 @@ import ContactUs from './Contact';
 import AboutMe from './AboutMe';
 import Footer from './Footer';
 
-interface NavbarProps {
-  method: () => void;
-  data: boolean;
-}
+const Home: React.FC = () => {
+  const [data, setData] = useState(false);
+  const [scrollProgress] = useState(0);
 
-const Home: React.FC<NavbarProps> = () => {
-    const [data, setData] = React.useState(false);
-    const [scrollProgress] = useState(0);
+  const toggleBackground = () => {
+    setData(!data);
+  };
 
-    const toggleBackground = () => {
-        setData(!data);
-    };
+  return (
+    <div className="relative w-full overflow-hidden">
+      {/* Top Progress Bar */}
+      <div className="fixed top-0 left-0 w-full h-1 bg-gray-200 z-50">
+        <div
+          className="h-full transition-all duration-75 ease-out"
+          style={{
+            width: `${scrollProgress}%`,
+            backgroundColor: data ? '#3B82F6' : '#2563EB',
+            transform: 'translate3d(0,0,0)',
+            willChange: 'width'
+          }}
+        />
+      </div>
 
-    // Optimized scroll handler using requestAnimationFrame
-    
-    return (
-        <div className="relative w-full overflow-hidden">
-            {/* Top Progress Bar with smooth transition */}
-            <div className="fixed top-0 left-0 w-full h-1 bg-gray-200 z-50">
-                <div 
-                    className="h-full transition-all duration-75 ease-out"
-                    style={{ 
-                        width: `${scrollProgress}%`,
-                        backgroundColor: data ? '#3B82F6' : '#2563EB',
-                        transform: 'translate3d(0,0,0)', // Force GPU acceleration
-                        willChange: 'width' // Hint to browser about animation
-                    }}
-                />
-            </div>
-
-            {/* Main Content */}
-            <div className="relative" style={{ 
-                backgroundColor: data ? 'black' : 'white', 
-                color: data ? 'white' : 'black',
-                paddingTop: '0.5rem'
-            }}>
-                <header>
-                    <Navbar method={toggleBackground} data={data} />
-                    <div id='main'><Main data={data}/></div>
-                    <div id='about'><AboutMe/></div>
-                    <div id='education'><Education /></div>
-                    <div id='skills'><HomeSkills/></div>
-                    <div id='projects'><Projects/></div>
-                    <div id='contact'><ContactUs/></div>
-                    <div id='footer'><Footer/></div>
-                </header>
-            </div>
-        </div>
-    );
+      {/* Main Content */}
+      <div
+        className="relative"
+        style={{
+          backgroundColor: data ? 'black' : 'white',
+          color: data ? 'white' : 'black',
+          paddingTop: '0.5rem'
+        }}
+      >
+        <header>
+          <Navbar method={toggleBackground} data={data} />
+          <div id="main"><Main data={data} /></div>
+          <div id="about"><AboutMe /></div>
+          <div id="education"><Education /></div>
+          <div id="skills"><HomeSkills /></div>
+          <div id="projects"><Projects /></div>
+          <div id="contact"><ContactUs /></div>
+          <div id="footer"><Footer /></div>
+        </header>
+      </div>
+    </div>
+  );
 };
 
 export default Home;
