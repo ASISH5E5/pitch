@@ -61,9 +61,7 @@ const Navbar: React.FC<NavbarProps> = ({ method, data }) => {
           <button onClick={toggleTheme} className="h-6 rounded-full transition ml-2">
             {theme === "dark" ? <Sun className="text-yellow-400" /> : <Moon className="text-gray-800" />}
           </button>
-          <button onClick={method} className="ml-4 text-sm underline">
-            Toggle BG
-          </button>
+          
         </ul>
 
         <div className="md:hidden">
